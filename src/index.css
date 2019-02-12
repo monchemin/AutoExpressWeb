@@ -12,3 +12,163 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.container {
+  max-width: 1024px;
+  min-height: 100vh;
+  background: #f9f9f9;
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+  align-content: center;
+}
+ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {background-color: #111;}
+
+ul.topnav li a.active {background-color: #4CAF50;}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px) {
+  ul.topnav li.right, 
+  ul.topnav li {float: none;}
+}
+ul.list-item{
+  list-style: none;
+}
+ul.list-item li {
+  border-bottom: solid 1px #333;
+  margin: 5px;
+}
+.item-description {
+  padding: 10px;
+  font: bold;
+  margin: 10px;
+}
+.button-modify {
+  padding: 5px;
+  margin: 5px;
+}
+.button-delete {
+  padding: 5px;
+  margin: 5px;
+}
+
+.button-validation {
+  
+  float: right;
+}
+
+.form-inline {  
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  padding: 50px 0 50px;
+}
+
+.form-inline label {
+  margin: 5px 10px 5px 0;
+}
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 0px 0px 0px 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 0px;
+  font-size: 18px;
+  width: 500px;
+  margin: 0px auto;
+  background-color: rgba(255, 255, 255, 0.75);
+  border: solid 1px lightgray;
+  display: inline-block;
+}
+
+
+
+.form-inline button {
+  padding: 5px 20px 5px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.form-inline button:hover {
+  background-color: royalblue;
+}
+
+.register-form {  
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  padding: 50px 0 50px;
+  width: 50%;
+  align-content: center;
+  align-self: center;
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+  
+}
+
+.register-form .prefix {
+  text-align: right;
+  width: 75px;
+}
+
+.register-form input {
+  vertical-align: middle;
+  margin: 0px 0px 0px 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 0px;
+  font-size: 18px;
+  width: 20px;
+  size: 100px;
+  margin: 0px;
+  background-color: rgba(255, 255, 255, 0.75);
+  
+  display: inline-block;
+}
+
+
+
+.register-form button {
+  padding: 5px 20px 5px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
+  vertical-align: middle;
+  align-self: center;
+}
+
+.register-form button:hover {
+  background-color: royalblue;
+}
+
+.register-form .input-group {
+  margin: 10px;
+}
+.register-form .form-control {
+  width: 100px;
+}
