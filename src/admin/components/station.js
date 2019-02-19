@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import {onFetchData as fetchCities} from '../models/cities';
 import {onFetchData as fetchZones} from '../models/zones';
 import {onFetchData, toSubmit} from '../models/stations';
-import {InputIcone, AlertError} from '../utils/formComponent';
-import {ChangePropertyValue} from '../utils/functionRepositoy'
+import {InputIcone, AlertError} from '../../common/formComponent';
+import {ChangePropertyValue} from '../../common/functionRepositoy';
 
 
 class Zone extends Component {

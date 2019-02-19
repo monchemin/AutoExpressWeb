@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {onFetchData, toSubmit} from '../models/carColors';
-import {InputIcone } from '../utils/formComponent';
-import {ChangePropertyValue} from '../utils/functionRepositoy'
+import {onFetchData, toSubmit} from '../models/cities';
+import {InputIcone } from '../../common/formComponent';
+import {ChangePropertyValue} from '../../common/functionRepositoy'
 
 
 
-class CarColor extends Component {
+class City extends Component {
 
     constructor(props){
         super(props);
@@ -34,7 +34,7 @@ class CarColor extends Component {
     createObject(){
         var newObject = {};
         newObject.PK = "";
-        newObject.colorName = "";
+        newObject.cityName = "";
         return newObject;
     }
    
@@ -71,7 +71,10 @@ class CarColor extends Component {
     }*/
     onToSubmit(){
        
-        if(this.state.selected.colorName ==="") return;
+        if(this.state.selected.cityName ==="") {
+            this.setState({ error: {"code":true, "message": "Invalid City Name"}});
+            return;
+        }
         var method = "post"
         if(this.state.selected.PK) method = "put";
         this.doChangeData(method, this.state.selected);
@@ -97,14 +100,14 @@ class CarColor extends Component {
             
            <div className="form-inline"> 
             
-            <InputIcone value={selected.colorName} id="colorName" labelName="Couleur" placeholder="couleur" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
+            <InputIcone value={selected.cityName} id="cityName" labelName="Ville" placeholder="Ville" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
             <button   onClick={() => this.onToSubmit()}>{buttonValue}</button>
            
            </div>
             <ul className="list-item">
                 {data.map((x) => 
                      <li key={x.PK} >
-                        <span className="item-description">{x.colorName}</span>
+                        <span className="item-description">{x.cityName}</span>
                         <button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button> 
                         <button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></li>
                 )}
@@ -115,4 +118,4 @@ class CarColor extends Component {
     }
 }
 
-export default CarColor;
+export default City;

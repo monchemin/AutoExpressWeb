@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {onFetchData as fetchCities} from '../models/cities';
 import {onFetchData, toSubmit} from '../models/zones';
-import {InputIcone, AlertError} from '../utils/formComponent';
-import {ChangePropertyValue} from '../utils/functionRepositoy'
+import {InputIcone, AlertError} from '../../common/formComponent';
+import {ChangePropertyValue} from '../../common/functionRepositoy';
 
 
 class Zone extends Component {
@@ -137,13 +137,15 @@ class Zone extends Component {
         }
         return(
             <div className="container">
-                {error.code ? <AlertError message={error.message}/> : null }
-                {this.brandList()}
-               
-                <div className="form-inline"> 
-                    <InputIcone value={selected.zoneName} id="zoneName" labelName="Zone" placeholder="Zone/Quartier" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
-                    <button onClick={() => this.onToSubmit()}>{buttonValue}</button>
+                <div className="register-form">
+                    {error.code ? <AlertError message={error.message}/> : null }
+                    {this.brandList()}
                 
+                    <div className="form-inline"> 
+                        <InputIcone value={selected.zoneName} id="zoneName" labelName="Zone" placeholder="Zone/Quartier" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
+                        <button onClick={() => this.onToSubmit()}>{buttonValue}</button>
+                    
+                    </div>
                 </div>
                 <ul className="list-item">
                         {currentZones.map((x) => 

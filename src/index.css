@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Numans');
 body {
   margin: 0;
   padding: 0;
@@ -12,6 +13,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
 .container {
   max-width: 1024px;
   min-height: 100vh;
@@ -41,7 +43,10 @@ ul.topnav li a {
 
 ul.topnav li a:hover:not(.active) {background-color: #111;}
 
-ul.topnav li a.active {background-color: #4CAF50;}
+ul.topnav li a.active {
+  background-color: #FFC312; 
+  color: #000000;
+}
 
 ul.topnav li.right {float: right;}
 
@@ -93,7 +98,7 @@ ul.list-item li {
   border: 1px solid #ddd;
   padding: 0px;
   font-size: 18px;
-  width: 500px;
+  width: 100%;
   margin: 0px auto;
   background-color: rgba(255, 255, 255, 0.75);
   border: solid 1px lightgray;

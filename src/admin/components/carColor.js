@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
-import {fetchCarbrand, toSubmit} from '../models/carBrands';
-import { InputIcone } from '../utils/formComponent';
+import {onFetchData, toSubmit} from '../models/carColors';
+import {InputIcone } from '../../common/formComponent';
+import {ChangePropertyValue} from '../../common/functionRepositoy'
 
 
 
-class Carbrand extends Component {
+class CarColor extends Component {
 
     constructor(props){
         super(props);
-        this.car = this.createBrandObject()
+        this.instance = this.createObject()
         this.state = {
-            selected: this.car,
+            selected: this.instance,
             data: [],
             isLoading: false,
             buttonValue: "Ajouter"
@@ -19,43 +20,39 @@ class Carbrand extends Component {
     }
     componentWillMount(){
         this.setState({isLoading: true})
-        this.onFetchCarbrand();
+        this.fetchData();
     }
 
-    onFetchCarbrand(){
-        fetchCarbrand().then(data => { 
+    fetchData(){
+        onFetchData().then(data => {; 
          this.setState({
             data: data.response,
             isLoading: false
         });
     })  
     }
-    createBrandObject(){
+    createObject(){
         var newObject = {};
         newObject.PK = "";
-        newObject.brandName = "";
+        newObject.colorName = "";
         return newObject;
     }
+   
 
     onPropertyValueChange(property, value){
         
-        this.ChangePropertyValue(this.car, property, value)
+        ChangePropertyValue(this.instance, property, value)
         this.setState({
-            "selected": this.car
+            "selected": this.instance
         })
        
     }
-
-    ChangePropertyValue(obj, prop, newValue)
-    {
-        if (obj.hasOwnProperty(prop)) obj[prop] = newValue;
-    }
     handleClick(i){
-        this.car = this.state.data.find((element) => {
+        this.instance = this.state.data.find((element) => {
            return  element.PK === i
         }) 
        this.setState({
-            selected: this.car,
+            selected: this.instance,
            buttonValue: "Modifier"
        })
     }
@@ -66,26 +63,26 @@ class Carbrand extends Component {
         
        this.doChangeData("del", toDelete);
     }
-    handleChange(event){
-            this.ChangePropertyValue(this.car, "brandName", event.target.value)
+  /*  handleChange(event){
+            this.ChangePropertyValue(this.instance, "colorName", event.target.value)
             this.setState({
-                "selected": this.car
+                "selected": this.instance
             })
-    }
+    }*/
     onToSubmit(){
        
-        if(this.state.selected.brandName ==="") return;
+        if(this.state.selected.colorName ==="") return;
         var method = "post"
         if(this.state.selected.PK) method = "put";
         this.doChangeData(method, this.state.selected);
     }
     doChangeData(method, element){
         toSubmit(method, element).then(data => {
-            this.car = this.createBrandObject()
+            this.instance = this.createObject()
             this.setState({
                 data: data.response,
                 buttonValue: "Ajouter",
-                selected: this.car
+                selected: this.instance
             })
         })
     }
@@ -95,27 +92,27 @@ class Carbrand extends Component {
            return <p>..loaging</p>
        }
         return(
-            
-            
+           
             <div className="container">
             
-           <div className="form-inline">
-           <InputIcone value={selected.brandName} id="brandName" labelName="Marque" placeholder="couleur" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
-           <button   onClick={() => this.onToSubmit()}>{buttonValue}</button>
-              </div>
+           <div className="form-inline"> 
+            
+            <InputIcone value={selected.colorName} id="colorName" labelName="Couleur" placeholder="couleur" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
+            <button   onClick={() => this.onToSubmit()}>{buttonValue}</button>
+           
+           </div>
             <ul className="list-item">
                 {data.map((x) => 
                      <li key={x.PK} >
-                        <span className="item-description">{x.brandName}</span>
+                        <span className="item-description">{x.colorName}</span>
                         <button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button> 
                         <button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></li>
                 )}
             </ul>
             </div>
            
-           
         )
     }
 }
 
-export default Carbrand;
+export default CarColor;

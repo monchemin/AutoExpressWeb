@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {fetchCarbrand} from '../models/carBrands';
 import {onFetchData, toSubmit} from '../models/carModels';
-import {InputIcone, AlertError} from '../utils/formComponent';
-import {ChangePropertyValue} from '../utils/functionRepositoy'
+import {InputIcone, AlertError} from '../../common/formComponent';
+import {ChangePropertyValue} from '../../common/functionRepositoy'
 
 
 class CarModel extends Component {

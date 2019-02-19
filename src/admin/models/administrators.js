@@ -12,6 +12,15 @@ export function onFetchData(){
   })
 }
 
+export function onLoginCheck(data){
+  return new Promise((resolver, reject) => {
+    axios.post(API, data)
+    .then(result => { resolver(result.data) }
+    )
+    .catch(error => console.log(error))
+  })
+}
+
 export function toSubmit(method, data){
         var axio;
         let dataToJson = JSON.stringify(data);
@@ -43,4 +52,5 @@ export function toSubmit(method, data){
         )
         .catch(error => console.log(error))
     })
+
 }

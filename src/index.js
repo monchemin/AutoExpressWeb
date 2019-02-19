@@ -1,19 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Header from './AppRoutes';
+
+import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-import './globalStyle.css';
-//import Carbrand from  './carBrand'
-import Header from './header';
-//import CarColor from './carColor';
-
-
-/*let modals = (
-    <React.Fragment>
-    <Header />
-    <CarColor />
-    </React.Fragment>
-
-) */
 
 ReactDOM.render(
     

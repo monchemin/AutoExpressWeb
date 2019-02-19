@@ -15,13 +15,15 @@ const InputPage = (props) => {
         placeholder= {placeholder}
         onChange={(event) => props.onChange(id, event.target.value )}
         value={value}
+        onBlur={()=>props.onBlur()}
       />
     </div>
   );
 }
 
 const InputIcone = (props) => {
-    const {id, labelName, placeholder, value} = props;
+    const {id, labelName, placeholder, value, type} = props;
+    
     return(
         <div className="input-group">
         <div className="input-group-prepend">
@@ -29,17 +31,42 @@ const InputIcone = (props) => {
             <i className="prefix">{labelName}</i>
           </span>
         </div>
-        <input type="text" 
+        <input type={type}
                className="form-control" 
                placeholder={placeholder} 
                aria-label={labelName} 
                aria-describedby={id}
                onChange={(event) => props.onChange(id, event.target.value )}
                value={value}
+               
                 />
       </div>
     )
 }
+
+const InputIconeBlur = (props) => {
+  const {id, labelName, placeholder, value} = props;
+  
+  return(
+      <div className="input-group">
+      <div className="input-group-prepend">
+        <span className="input-group-text" id={id}>
+          <i className="prefix">{labelName}</i>
+        </span>
+      </div>
+      <input type="text" 
+             className="form-control" 
+             placeholder={placeholder} 
+             aria-label={labelName} 
+             aria-describedby={id}
+             onChange={(event) => props.onChange(id, event.target.value )}
+             value={value}
+             onBlur={()=>props.onBlur()}
+              />
+    </div>
+  )
+}
+
 const InputNext = (props) => {
     const {id, labelName, placeholder} = props;
 return(
@@ -81,4 +108,4 @@ const AlertError = (props) => {
   )
 }
 
-export {InputPage, InputNext, InputIcone, SelectPage, AlertError};
+export {InputPage, InputNext, InputIcone, SelectPage, AlertError, InputIconeBlur};
