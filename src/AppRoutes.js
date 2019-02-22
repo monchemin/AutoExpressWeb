@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Dashboard from './dashboard/Dashboard';
 import AdminLogin from './admin/components/adminLogin';
 import AdminHeader from './admin/AdminHeader'
@@ -10,25 +10,46 @@ import Administator from './admin/components/administratror';
 import City from './admin/components/city';
 import Zone from './admin/components/zone';
 import Station from './admin/components/station';
+import Authenticate from './common/Authenticate';
 
 
-  const  Header = () => (  
+  const  ApplicationRoutes = () => (  
         <Router>
             <div>      
                 <Route exact path='/' component={Dashboard} />
-                <Route  path='/admin' component={AdminHeader} />
-                <Route  path='/adminheader' component={AdminHeader} />
-                <Route  path='/admin/carbrand' component={Carbrand} />
-                <Route  path='/admin/carcolor' component={CarColor} />
-                <Route  path='/admin/carmodel' component={CarModel} />
-                <Route  path='/admin/city' component={City} />
-                <Route  path='/admin/Zone' component={Zone} />
-                <Route  path='/admin/Station' component={Station} />
-                <Route  path='/admin/admins' component={Administator} />
-                <Route  exact path='/admin/login' component={AdminLogin} />
+                <AdminRoute  path='/admin' component={AdminHeader} />
+                <AdminRoute  path='/admin/dashboard' component={AdminHeader} />
+                <AdminRoute  path='/admin/carbrand' component={Carbrand} />
+                <AdminRoute  path='/admin/carcolor' component={CarColor} />
+                <AdminRoute  path='/admin/carmodel' component={CarModel} />
+                <AdminRoute  path='/admin/city' component={City} />
+                <AdminRoute  path='/admin/Zone' component={Zone} />
+                <AdminRoute  path='/admin/Station' component={Station} />
+                <AdminRoute  path='/admin/admins' component={Administator} />
+                <Route   path='/login' component={AdminLogin} />
+                
             </div>
         </Router> 
   );
 
+  const AdminRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={props =>
+        Authenticate.Admin() ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: props.location }
+            }}
+          />
+        )
+      }
+    />
+  );
 
- export default Header
+  
+
+ export default ApplicationRoutes

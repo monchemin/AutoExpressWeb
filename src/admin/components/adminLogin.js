@@ -1,30 +1,42 @@
 import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
 import '../adminlogin.css';
-
+import {InputIcone, AlertError } from '../../common/formComponent';
 
 
 class AdminLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: "",
+            username: "",
             passsword: "",
-            isLogged: false
+            isAdminLogged: false,
+            error: {"code":false, "message": ""}
         }
+        
     }
 
     HandleClick() {
-        this.setState({isLogged: true});  
+        if(this.state.username === "" || this.state.password === ""){
+            this.setState({ error: {"code":true, "message": "username / password invalid"}});
+            return;
+        }
+        sessionStorage.setItem('isAdminLogged', true);
+        this.setState({isAdminLogged: true});        
+    }
+
+    onPropertyValueChange(property, value){
+        this.setState({[property]: value});
        
     }
     
     render() {
-        const { isLogged } = this.state;
+        const { isAdminLogged, username, password, error } = this.state;
+        const { from } = this.props.location.state || { from: { pathname: "/" } };
         
-     if (isLogged) {
-       return <Redirect to='/admin'/>;
-     }
+    if(isAdminLogged) {
+        return <Redirect to={from} />
+    }
         return(
             
             <div className="container">  
@@ -39,19 +51,13 @@ class AdminLogin extends Component {
                         </div>
                     </div>
                     <div className="card-body">
+                    {error.code ? <AlertError message={error.message}/> : null }
                         <form>
-                            <div className="input-group form-group">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text"><i className="fas fa-user"></i></span>
-                                </div>
-                                <input type="text" className="form-control" placeholder="username" />   
-                            </div>
-                            <div className="input-group form-group">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text"><i className="fas fa-key"></i></span>
-                                </div>
-                                <input type="password" className="form-control" placeholder="password" />
-                            </div>
+                           
+                            
+                            <InputIcone value={username} type="text" id="username" labelName="" placeholder="username" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
+                            <span className="space"></span>
+                            <InputIcone value={password} type="text" id="password" labelName="" placeholder="password" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
                             
                             <div className="form-group">
                                 <input type="button" value="Login" className="btn float-right login_btn" onClick={()=>{this.HandleClick()}} />

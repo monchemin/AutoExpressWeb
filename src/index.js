@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Header from './AppRoutes';
+import ApplicationRoutes from './AppRoutes';
+
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 
 ReactDOM.render(
     
-   <Header/>,
+   <ApplicationRoutes/>,
    
     document.getElementById('root'));

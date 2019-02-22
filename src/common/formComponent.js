@@ -37,8 +37,7 @@ const InputIcone = (props) => {
                aria-label={labelName} 
                aria-describedby={id}
                onChange={(event) => props.onChange(id, event.target.value )}
-               value={value}
-               
+               value={value}            
                 />
       </div>
     )
