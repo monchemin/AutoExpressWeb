@@ -124,7 +124,7 @@ ul.list-item li {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
-  padding: 50px 0 50px;
+  padding: 0px;
   width: 50%;
   align-content: center;
   align-self: center;
@@ -136,7 +136,7 @@ ul.list-item li {
 
 .register-form .prefix {
   text-align: right;
-  width: 75px;
+  
 }
 
 .register-form input {

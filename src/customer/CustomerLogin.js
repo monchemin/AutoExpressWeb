@@ -1,17 +1,21 @@
 import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom';
-import '../adminlogin.css';
-import {InputIcone, AlertError } from '../../common/formComponent';
+import { Redirect, NavLink, Link } from 'react-router-dom';
+
 import axios from 'axios';
 
+import '../admin/adminlogin.css';
+import {InputIcone, AlertError } from '../common/formComponent';
 
-class AdminLogin extends Component {
+
+
+
+class CustomerLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
             username: "",
             passsword: "",
-            isAdminLogged: false,
+            isLogged: false,
             error: {"code":false, "message": ""}
         }
         
@@ -26,11 +30,17 @@ class AdminLogin extends Component {
                     "login": this.state.username,
                     "password": this.state.password
                     }
-        axios.post("http://autoexpress.gabways.com/api/adminlogin.php", data)
-                    .then(response => {
-                       if(response.data.isLog === true){
-                        sessionStorage.setItem('isAdminLogged', true);
-                        this.setState({"isAdminLogged": response.data.isLog});
+        axios.post("http://autoexpress.gabways.com/api/login.php", data)
+                    .then(result => {
+                       if(result.data.isLog === true){
+                        sessionStorage.setItem('isLogged', true);
+                        sessionStorage.setItem('customer', result.data.customerInfo);
+                        console.log(result.data.customerInfo[0].PK);
+                        axios.get("http://autoexpress.gabways.com/api/driver.php/"+result.data.customerInfo[0].PK)
+                        .then(result => {
+                            if(result.data.response.length !== 0) sessionStorage.setItem('isDriver', true);
+                        });
+                        this.setState({"isLogged": result.data.isLog});
                        } 
                      } )
               
@@ -42,10 +52,10 @@ class AdminLogin extends Component {
     }
     
     render() {
-        const { isAdminLogged, username, password, error } = this.state;
-        const { from } = this.props.location.state || { from: { pathname: "/" } };
+        const { isLogged, username, password, error } = this.state;
+        const { from } = this.props.location.state || { from: { pathname: "/profil" } };
         
-    if(isAdminLogged) {
+    if(isLogged) {
         return <Redirect to={from} />
     }
         return(
@@ -76,9 +86,11 @@ class AdminLogin extends Component {
                         </form>
                     </div>
                     <div className="card-footer">
-                        
+                        <div className="d-flex justify-content-center links">
+                            Pas encore de compte ?<Link to="/register">Enregistre toi !</Link>
+                        </div>
                         <div className="d-flex justify-content-center">
-                            <a href="#">Forgot your password?</a>
+                            <NavLink to="">Forgot your password?</NavLink>
                         </div>
                     </div>
                     
@@ -92,4 +104,4 @@ class AdminLogin extends Component {
     }
 }
 
-export default AdminLogin
+export default CustomerLogin

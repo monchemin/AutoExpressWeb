@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {InputIcone, InputIconeBlur, AlertError} from '../../common/formComponent';
 import {onFetchData, toSubmit, onLoginCheck} from '../models/administrators';
-import { admin } from '../models/entities';
+import { admin } from '../../common/entities';
 import {ChangePropertyValue} from '../../common/functionRepositoy';
 
 

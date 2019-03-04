@@ -9,7 +9,7 @@ const Authenticate = {
     },
     Customer() {
       let  isAuthenticated =  false
-      if(sessionStorage.getItem("isCustomerLogged")  !== null) {
+      if(sessionStorage.getItem("isLogged")  !== null) {
         isAuthenticated = true
        }
        return isAuthenticated;
