@@ -10,6 +10,7 @@ import Administator from './admin/components/administratror';
 import City from './admin/components/city';
 import Zone from './admin/components/zone';
 import Station from './admin/components/station';
+import PickupHour from './admin/components/PickupHour';
 import Authenticate from './common/Authenticate';
 import CustomerLogin from './customer/CustomerLogin';
 import CustomerRegister from './customer/CustomerRegister'
@@ -30,6 +31,7 @@ import DriverRegistration from './customer/DriverRegister';
                 <AdminRoute  path='/admin/city' component={City} />
                 <AdminRoute  path='/admin/Zone' component={Zone} />
                 <AdminRoute  path='/admin/Station' component={Station} />
+                <AdminRoute  path='/admin/hour' component={PickupHour} />
                 <AdminRoute  path='/admin/admins' component={Administator} />
                 <Route   path='/adminlogin' component={AdminLogin} />
                 <Route   path='/login' component={CustomerLogin} />

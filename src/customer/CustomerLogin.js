@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import '../admin/adminlogin.css';
 import {InputIcone, AlertError } from '../common/formComponent';
+import * as SessionService from '../common/SessionService';
 
 
 
@@ -33,12 +34,12 @@ class CustomerLogin extends Component {
         axios.post("http://autoexpress.gabways.com/api/login.php", data)
                     .then(result => {
                        if(result.data.isLog === true){
-                        sessionStorage.setItem('isLogged', true);
-                        sessionStorage.setItem('customer', result.data.customerInfo);
-                        console.log(result.data.customerInfo[0].PK);
+                        SessionService.setLogin();
+                        SessionService.setCustomer(JSON.stringify(result.data.customerInfo[0]));
+                       
                         axios.get("http://autoexpress.gabways.com/api/driver.php/"+result.data.customerInfo[0].PK)
                         .then(result => {
-                            if(result.data.response.length !== 0) sessionStorage.setItem('isDriver', true);
+                            if(result.data.response.length !== 0) SessionService.setDriver();
                         });
                         this.setState({"isLogged": result.data.isLog});
                        } 

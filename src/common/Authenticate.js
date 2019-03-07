@@ -1,3 +1,4 @@
+import {isLog} from './SessionService';
 const Authenticate = {
    
     Admin() {
@@ -9,7 +10,7 @@ const Authenticate = {
     },
     Customer() {
       let  isAuthenticated =  false
-      if(sessionStorage.getItem("isLogged")  !== null) {
+      if( isLog()  !== null) {
         isAuthenticated = true
        }
        return isAuthenticated;

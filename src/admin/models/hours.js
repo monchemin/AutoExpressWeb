@@ -1,8 +1,7 @@
 import {default as axios} from 'axios';
 
-const API = "http://autoexpress.gabways.com/api/customer.php";
-const APIDRIVER = "http://autoexpress.gabways.com/api/driver.php";
-//const API = "http://localhost/autoexpress/api/customer"
+const API = "http://autoexpress.gabways.com/api/pickuphour.php";
+//const API = "http://localhost/autoexpress/api/pickuphour"
 
 export function onFetchData(){
   return new Promise((resolver, reject) => {
@@ -13,29 +12,9 @@ export function onFetchData(){
   })
 }
 
-export function onLoginCheck(data){
-  return new Promise((resolver, reject) => {
-    axios.post(API, data)
-    .then(result => { resolver(result.data) }
-    )
-    .catch(error => console.log(error))
-  })
-}
-
-export function AddDriver(data){
-  console.log(data);
-  return new Promise((resolver, reject) => {
-    axios.post(APIDRIVER, data)
-    .then(result => { resolver(result.data) }
-    )
-    .catch(error => console.log(error))
-  })
-}
-
 export function toSubmit(method, data){
         var axio;
         let dataToJson = JSON.stringify(data);
-        
         switch(method) {
             case "post":
             axio = axios.post(API, dataToJson)
@@ -52,11 +31,15 @@ export function toSubmit(method, data){
         return new Promise((resolver, reject) => {
         axio.then(result => {
            
-            resolver(result.data);
+            if( result.data.status === 200)
+            {
+                
+                onFetchData().then(data => resolver(data))
+            }
+            else { console.log(result.data)}
         }
            
         )
         .catch(error => console.log(error))
     })
-
 }

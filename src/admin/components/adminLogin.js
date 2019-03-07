@@ -31,7 +31,8 @@ class AdminLogin extends Component {
                        if(response.data.isLog === true){
                         sessionStorage.setItem('isAdminLogged', true);
                         this.setState({"isAdminLogged": response.data.isLog});
-                       } 
+                       }
+                       else  this.setState({ error: {"code":true, "message": "username / password invalid"}});  
                      } )
               
     }
