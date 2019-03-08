@@ -34,5 +34,5 @@ steps:
     clean: false 
     cleanContents: false
     overwrite: true 
-    preservePaths: false 
+    preservePaths: true 
     trustSSL: true
