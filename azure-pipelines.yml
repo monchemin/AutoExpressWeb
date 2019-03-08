@@ -19,3 +19,20 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+# FTP Upload
+# FTP Upload
+- task: FtpUpload@1
+  inputs:
+    credentialsOption: inputs
+    #serverEndpoint: # Required when credentialsOption == ServiceEndpoint
+    serverUrl: 216.15.188.161
+    username: gabways.com
+    password: gwzz@4520-LL
+    rootDirectory: 
+    filePatterns: '**' 
+    remoteDirectory: '/SubDomains/autoexpressweb' 
+    clean: false 
+    cleanContents: false
+    overwrite: true 
+    preservePaths: false 
+    trustSSL: true
