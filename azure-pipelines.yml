@@ -28,7 +28,7 @@ steps:
     serverUrl: ftp://gabways.com
     username: gabways.com
     password: gwzz@4520-LL
-    rootDirectory: $(Agent.BuildDirectory)
+    rootDirectory: $(Build.ArtifactStagingDirectory)
     filePatterns: '**' 
     remoteDirectory: '/SubDomains/autoexpressweb' 
     clean: false 
