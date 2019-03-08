@@ -25,7 +25,7 @@ steps:
   inputs:
     credentialsOption: inputs
     #serverEndpoint: # Required when credentialsOption == ServiceEndpoint
-    serverUrl: 216.15.188.161
+    serverUrl: ftp//gabways.com
     username: gabways.com
     password: gwzz@4520-LL
     rootDirectory: 
