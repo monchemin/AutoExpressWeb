@@ -9,9 +9,9 @@ class DashboardHeader extends Component {
           return( 
 <div>
 <ul className="topnav">
-    <li><NavLink exact activeClassName="active" to="/dashbord">Home</NavLink></li>
-    <li><NavLink  activeClassName="active" to="/admin/carbrand">Rechercher</NavLink></li>
-    <li><NavLink  activeClassName="active" to="/profil">Annoncer</NavLink></li>
+    <li><NavLink exact activeClassName="active" to="/">Home</NavLink></li>
+    <li><NavLink  activeClassName="active" to="/profil/search">Rechercher</NavLink></li>
+    <li><NavLink  activeClassName="active" to="/profil/notice">Annoncer</NavLink></li>
     
     <li><NavLink  activeClassName="rigth" to="/login">Connnexion</NavLink></li>
 </ul>

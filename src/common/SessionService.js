@@ -8,6 +8,7 @@ export function isLog() {
 
 export function setDriver() {
     sessionStorage.setItem('driver', true);
+    console.log("isdriver");
 }
 
 export function isDriver() {
@@ -24,5 +25,5 @@ export function getCustomerID() {
 }
 
 export function getCustomerName() {
-    return JSON.parse(sessionStorage.getItem('customer')).customerFistName;
+    return sessionStorage.getItem('customer') !== null ? JSON.parse(sessionStorage.getItem('customer')).customerFistName : null;
 }
