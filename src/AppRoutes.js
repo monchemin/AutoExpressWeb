@@ -16,6 +16,7 @@ import CustomerLogin from './customer/CustomerLogin';
 import CustomerRegister from './customer/CustomerRegister'
 import CustomerHeader from './customer/CustomerHeader';
 import DriverRegistration from './customer/DriverRegister';
+import RouteNotice from './customer/RouteNotice';
 
 
 
@@ -38,6 +39,7 @@ import DriverRegistration from './customer/DriverRegister';
                 <Route   path='/register' component={CustomerRegister} />
                 <CustomerRoute path='/profil' component={CustomerHeader} />
                 <CustomerRoute path='/profil/driver' component={DriverRegistration} />
+                <CustomerRoute path='/profil/notice' component={RouteNotice} />
                 
             </div>
         </Router> 

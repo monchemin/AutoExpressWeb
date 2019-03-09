@@ -13,9 +13,9 @@ class CustomerHeader extends Component {
 <div>
 <ul className="topnav">
     <li><NavLink exact activeClassName="active" to="/profil">Home</NavLink></li>
-    <li><NavLink  activeClassName="active" to="/admin/carbrand">Rechercher</NavLink></li>
+    <li><NavLink  activeClassName="active" to="/profil/search">Rechercher</NavLink></li>
     <li> {SessionService.isDriver() === true ? 
-          <NavLink  activeClassName="active" to="/admin/carcolor">Annoncer</NavLink> 
+          <NavLink  activeClassName="active" to="/profil/notice">Annoncer</NavLink> 
           : <NavLink  activeClassName="active" to="/profil/driver">Devenir conducteur</NavLink> 
     }
           </li>

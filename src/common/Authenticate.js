@@ -10,7 +10,7 @@ const Authenticate = {
     },
     Customer() {
       let  isAuthenticated =  false
-      if( isLog()  !== null) {
+      if( isLog() ) {
         isAuthenticated = true
        }
        return isAuthenticated;
