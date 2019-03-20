@@ -1,6 +1,7 @@
 import {default as axios} from 'axios';
+import Config from '../../config';
 
-const API = "http://autoexpress.gabways.com/api/zone.php";
+const API = Config.API_HOST + "zone.php";
 //const API = "http://localhost/autoexpress/api/zone"
 
 export function onFetchData(){

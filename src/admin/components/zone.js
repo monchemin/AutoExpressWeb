@@ -137,24 +137,35 @@ class Zone extends Component {
         }
         return(
             <div className="container">
-                <div className="register-form">
-                    {error.code ? <AlertError message={error.message}/> : null }
-                    {this.brandList()}
-                
-                    <div className="form-inline"> 
-                        <InputIcone value={selected.zoneName} id="zoneName" labelName="Zone" placeholder="Zone/Quartier" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
-                        <button onClick={() => this.onToSubmit()}>{buttonValue}</button>
-                    
+            <div className="d-flex justify-content-center h-100">
+                <div>
+                    <div className="register-form">
+                        {error.code ? <AlertError message={error.message}/> : null }
+                        {this.brandList()}
+                            <InputIcone value={selected.zoneName} id="zoneName" labelName="Zone" placeholder="Zone/Quartier" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
+                            <button onClick={() => this.onToSubmit()}>{buttonValue}</button>   
+                    </div>
+                    <div>
+                    <table className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td></td><td></td><td></td> 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {currentZones.map((x) => 
+                                <tr>
+                                    <td className="item-description">{x.zoneName}</td>
+                                    <td><button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button></td> 
+                                    <td><button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></td>
+                                </tr>
+                                )}
+                            </tbody>
+                    </table>
                     </div>
                 </div>
-                <ul className="list-item">
-                        {currentZones.map((x) => 
-                            <li key={x.PK} >
-                                <span className="item-description">{x.zoneName}</span>
-                                <button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button> 
-                                <button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></li>
-                        )}
-                </ul>
+                
+            </div>
             </div>
         );
     }

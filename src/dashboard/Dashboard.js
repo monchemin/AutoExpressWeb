@@ -1,12 +1,24 @@
 import React, {Component} from 'react';
 
+import {DefaultRoutes} from '../customer/model';
+import {RouteDisplay} from '../common/formComponent';
 
 class Dashboard extends Component {
-    render(){
-        console.log("auth " + sessionStorage.getItem("adminLog"));
+    constructor(props){
+        super(props);
+        this.state = {routes: [] }
         sessionStorage.clear();
+    }
+
+    componentWillMount(){
+        DefaultRoutes().then(data => {
+            this.setState({routes: data.maindata.response}); }
+        )
+    }
+    render(){
+        
         return(
-            <div>Dashbord</div>
+            <RouteDisplay routes={this.state.routes}/>
         )
     }
 }

@@ -1,51 +1,47 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 
+import "react-datepicker/dist/react-datepicker.css";
+import Config from '../config';
 
-import {InputIcone, InputIconeBlur, AlertError} from '../common/formComponent';
-import {onFetchData, toSubmit, AddDriver} from './model';
-import { Driver } from '../common/entities';
-import {ChangePropertyValue, yearValidation, isObjectComplete} from '../common/functionRepositoy';
+
+import {InputIcone, AlertError, AlertSuccess} from '../common/formComponent';
+import {onFetchData, AddRoute} from './model';
+import { Routes } from '../common/entities';
+import {ChangePropertyValue, isObjectComplete} from '../common/functionRepositoy';
 import * as SessionService from '../common/SessionService';
 
 
 
-
-
-
-class DriverRegistration extends Component{
-
+class RouteNotice extends Component{
     constructor(props){
         super(props);
-        this.instance = Driver()
+        this.instance = Routes()
         this.state = {
             selected: this.instance,
-            data: [],
-            brands: [],
-            models: [],
-            buttonValue: "Ajouter",
-            error: {"code":false, "message": ""}
+            stations: [],
+            buttonValue: "Valider",
+            error: {"code":false, "message": ""},
+            startDate: new Date(),
+            FK_DepartureStage: "",
+            FK_ArrivalStage: ""
         }
         
-        this.carModels = [];
-        this.carBrands = [];
-        this.carColors = [];
+        this.stations = [];
+        
+        this.hours = [];
     }
     
     componentWillMount(){
        
-        axios.get("http://autoexpress.gabways.com/api/carModel.php")
-                                .then(result => {this.carModels = result.data.response});
-        
-        axios.get("http://autoexpress.gabways.com/api/carBrand.php")
-                                .then(result => {
-                                    this.carBrands =  result.data.response;
-                                    this.brandChoice(0);
-                                 });
+        axios.get(Config.API_HOST + "pickuphour.php")
+              .then(result => {this.hours =  result.data.response;}); 
                                    
-        axios.get("http://autoexpress.gabways.com/api/carColor.php")
-                                .then(result => {this.carColors =  result.data.response}); 
+        axios.get(Config.API_HOST + "routestation.php")
+                                .then(result => {this.setState({stations: result.data.response }) ;  
+                                            
+                                        });
+       
         
     }
 
@@ -60,40 +56,36 @@ class DriverRegistration extends Component{
     
 
     onPropertyValueChange(property, value){
-        
+       
         ChangePropertyValue(this.instance, property, value)
         this.setState({
             "selected": this.instance
         })
         
-    }
-
-    onPassWordChande(){
-        this.setState({"confirmation" : this.instance.customerPassword === this.instance.confirmation});
-    }
+    }  
 
     onToSubmit(){
-       
+       this.onPropertyValueChange("FK_Driver", SessionService.getCustomerID());
         if( isObjectComplete(this.state.selected) === false) {
             this.setState({ error: {"code":true, "message": "Invalid information"}});
             return;
         }
        
-        console.log(this.state.selected)
         this.doChangeData("POST", this.state.selected);
     }
     doChangeData(method, element){
-        AddDriver(element).then(data => {
+        AddRoute(element).then(data => {
             if(data.status === 200) {
-                this.setState({isRegistered: true});
-                SessionService.setDriver();
+                this.instance = Routes();
+                this.setState({isRegistered: true,
+                              selected: this.instance});
             }
         })
     }
     
-    carYearValidation(property, value){  
+    NumberValidation(property, value){  
         
-        if( yearValidation(value) ) {
+        if( !isNaN(value) ) {
             this.onPropertyValueChange(property, value);
             this.setState({ yearError: false });
         }
@@ -102,108 +94,91 @@ class DriverRegistration extends Component{
         }
     }
 
-    brandChoice(id) {
-        this.setState({models: this.carModels.filter(model => model.FK_brand === id ) })
-    }
-
-
-    brandList(){
-        return(
-        <div className = "input-group">
-            <div className="input-group-prepend">
-                <span className="input-group-text" id="brand-list">
-                    <i className="prefix"></i>
-                </span>
-            </div>  
-            <select className="browser-default custom-select" id="brand-list" onChange={(event) => this.brandChoice(event.target.value)}>
-                <option>Marque</option>
-                    {this.carBrands.map((brand) => {
-                            return <option key={brand.PK} value={brand.PK}>{brand.brandName}</option>
-                        })}
-            </select>
-        </div>
-        )
-    }
-
-    modelList(){
-        return(
-        <div className = "input-group">
-            <div className="input-group-prepend">
-                <span className="input-group-text" id="model-list">
-                    <i className="prefix"></i>
-                </span>
-            </div>  
-            <select className="browser-default custom-select" id="model-list" onChange={(event) => this.onPropertyValueChange("FK_carmodel", event.target.value)}>
-                <option>Modele</option>
-                    {this.state.models.map((brand) => {
-                            return <option key={brand.PK} value={brand.PK}>{brand.modelName}</option>
-                        })}
-            </select>
-        </div>
-        )
-    }
-
-    colorList(){
-        return(
-        <div className = "input-group">
-            <div className="input-group-prepend">
-                <span className="input-group-text" id="color-list">
-                    <i className="prefix"></i>
-                </span>
-            </div>  
-            <select className="browser-default custom-select" id="color-list" onChange={(event) => this.onPropertyValueChange("FK_carcolor", event.target.value)}>
-                <option>Couleur</option>
-                    {this.carColors.map((brand) => {
-                            return <option key={brand.PK} value={brand.PK}>{brand.colorName}</option>
-                        })}
-            </select>
-        </div>
-        )
-    }
-    render(){
-        const {selected, buttonValue, error, yearError, confirmation, emailValid, isRegistered} = this.state;
-
-        if(isRegistered===true) {
-            return (
-                <AlertError message="Enregistrement effectuee"/>
-            )
-        }
+    handleStationChange(property, value){
+        let station = this.state.stations.find(station => { return station.stationName === value});
+        if(station !== undefined) this.onPropertyValueChange(property, station.PK);
+      //  this.setState({property, value });
+      //  console.log(this.state);
         
+    }
+
+    stationList(){
+        return(
+        <div className = "input-group">
+            <div className="input-group-prepend">
+                <span className="input-group-text" id="station-list">
+                    <i className="prefix"></i>
+                </span>
+            </div>  
+            <select className="browser-default custom-select" id="station-list" placeholder="Depart" onChange={(event) => this.handleStationChange(event.target.value)}>
+               
+                    {this.state.stations.map((station) => {
+                            return <option key={station.PK} value={station.stationName}>{station.stationName}</option>
+                        })}
+            </select>
+        </div>
+        )
+    }
+    stationData(id, placeholder) {
+        return(
+            <div>
+       <datalist id="list-station">
+            {this.state.stations.map((station) => {
+                            return <option key={station.PK} value={station.stationName}></option>
+                        })}
+       </datalist>
+       <InputIcone  id={id} list="list-station" labelName="" type="search" placeholder={placeholder} onChange={(property, value) => this.handleStationChange(property, value) } />
+        </div>)
+    }
+    
+    hourList(){
+        return(
+        <div className = "input-group">
+            <div className="input-group-prepend">
+                <span className="input-group-text" id="hour-list">
+                    <i className="prefix"></i>
+                </span>
+            </div>  
+            <select className="browser-default custom-select" id="hour-list" onChange={(event) => this.onPropertyValueChange("FK_Hour", event.target.value)} placeholder="Heure de depart">
+                <option>Heure</option>
+                    {this.hours.map((h) => {
+                            return <option key={h.PK} value={h.PK}>{h.hour}</option>
+                        })}
+            </select>
+        </div>
+        )
+    }
+
+    render(){
+        const { buttonValue, error, yearError, isRegistered} = this.state;
+               
          return(
-            <div className="container">  
+            <div className="container"> 
             <div className="d-flex justify-content-center h-100">
             <div className="card">
-               <div className="card-header">
-                   <h3>Registration</h3>
-                   <div className="d-flex justify-content-end social_icon">
-                       <span><i className="fab fa-facebook-square"></i></span>
-                       <span><i className="fab fa-google-plus-square"></i></span>
-                       <span><i className="fab fa-twitter-square"></i></span>
-                   </div>
-               </div>
-               <div className="card-body">
-               <div className="register-form"> 
             {error.code ? <AlertError message={error.message}/> : null }
-             <InputIcone value={selected.customerFistName} id="drivingPermitNumber" labelName="" placeholder="Numero de Permis" onChange={(property, value) => this.onPropertyValueChange(property, value) } />
-             <InputIcone value={selected.customerLastName} id="carRegistrationNumber" labelName="" placeholder="Immatriculation" onChange={(property, value) => this.onPropertyValueChange(property, value) } />             
-             {this.brandList()}
-             {this.modelList()}
-             {this.colorList()}
-             <InputIcone value={selected.customerPhoneNumber} id="carYear" labelName="" placeholder="Annee" onChange={(property, value) => this.carYearValidation(property, value) } />                          
-             {yearError===true ? <AlertError message="Annee Invalide"/> : null }
-             <button onClick={() => this.onToSubmit()} >{buttonValue} </button>
-            
-            </div>
-                   
-               </div>
-                  
+            {isRegistered === true ? <AlertSuccess message="Enregistree"/> : null }
+               <div className="card-header"> <h3>Depart</h3></div>
+               <div className="card-body register-form">
+                    <div className="register-form"> 
+                        {this.stationData('FK_DepartureStage', 'depart')}
+                        {this.stationData('FK_ArrivalStage', 'arrivee')}
+                        <InputIcone  id="routeDate" type="date" labelName="" placeholder="date depart" onChange={(property, value) => this.onPropertyValueChange(property, value) } />                          
+                        {this.hourList()}
+                        <InputIcone  id="routePrice" labelName="" placeholder="Montant" onChange={(property, value) => this.NumberValidation(property, value, 0, 1) } />
+                        <InputIcone  id="routePlace" labelName="" placeholder="Nombre de places" onChange={(property, value) => this.NumberValidation(property, value, 3, 0) } />                          
+                        {yearError===true ? <AlertError message="Montant Invalide"/> : null }
+                        <button onClick={() => this.onToSubmit()} >{buttonValue} </button>
+                    </div> 
+               </div>    
            </div>
-            </div>
+           
+           
+        </div>
        </div>
-
             
          )
      }
 }
 
-export default DriverRegistration
+export default RouteNotice

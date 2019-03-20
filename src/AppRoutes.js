@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, NavLink } from "react-router-dom";
 import DashboardHeader from './dashboard/DashboardHeader';
 import AdminLogin from './admin/components/adminLogin';
 import AdminHeader from './admin/AdminHeader'
@@ -17,6 +17,7 @@ import CustomerRegister from './customer/CustomerRegister'
 import CustomerHeader from './customer/CustomerHeader';
 import DriverRegistration from './customer/DriverRegister';
 import RouteNotice from './customer/RouteNotice';
+import RouteSearch from './common/search';
 
 
 
@@ -24,6 +25,8 @@ import RouteNotice from './customer/RouteNotice';
         <Router>
             <div>      
                 <Route exact path='/' component={DashboardHeader} />
+                <Route   path='/dashboard' component={DashboardHeader} />
+                <DefaultRoute    path='/search' component={RouteSearch} />
                 <AdminRoute  path='/admin' component={AdminHeader} />
                 <AdminRoute  path='/admin/dashboard' component={AdminHeader} />
                 <AdminRoute  path='/admin/carbrand' component={Carbrand} />
@@ -35,11 +38,13 @@ import RouteNotice from './customer/RouteNotice';
                 <AdminRoute  path='/admin/hour' component={PickupHour} />
                 <AdminRoute  path='/admin/admins' component={Administator} />
                 <Route   path='/adminlogin' component={AdminLogin} />
-                <Route   path='/login' component={CustomerLogin} />
-                <Route   path='/register' component={CustomerRegister} />
+                <DefaultRoute   path='/login' component={CustomerLogin} />
+                <DefaultRoute   path='/register' component={CustomerRegister} />
+               
                 <CustomerRoute path='/profil' component={CustomerHeader} />
                 <CustomerRoute path='/profil/driver' component={DriverRegistration} />
                 <CustomerRoute path='/profil/notice' component={RouteNotice} />
+                <CustomerRoute path='/profil/search' component={RouteSearch} />
                 
             </div>
         </Router> 
@@ -80,7 +85,34 @@ import RouteNotice from './customer/RouteNotice';
       }
     />
   );
+  const DefaultRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={props =>
+         (
+          <div>
+            <Navigation />
+            <Component {...props} />
+          </div>
+          
+        ) 
+      }
+    />
+  );
 
-  
+  const Navigation = () => {
+    return( 
+        <div>
+            <ul className="topnav">
+                <li><NavLink  activeClassName="active" to="/">Home</NavLink></li>
+                <li><NavLink  activeClassName="active" to="/search">Rechercher</NavLink></li>
+                <li><NavLink  activeClassName="active" to="/profil/notice">Annoncer</NavLink></li>
+                
+                <li className = "right"><NavLink  activeClassName="active" to="/login">Connnexion</NavLink></li>
+            </ul>
+        </div>
+
+      )
+}
 
  export default ApplicationRoutes

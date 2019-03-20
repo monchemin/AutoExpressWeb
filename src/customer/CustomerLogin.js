@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import { Redirect, NavLink, Link } from 'react-router-dom';
 
+
 import axios from 'axios';
 
 import '../admin/adminlogin.css';
 import {InputIcone, AlertError } from '../common/formComponent';
 import * as SessionService from '../common/SessionService';
+import Config from '../config';
 
 
 
@@ -31,13 +33,13 @@ class CustomerLogin extends Component {
                     "login": this.state.username,
                     "password": this.state.password
                     }
-        axios.post("http://autoexpress.gabways.com/api/login.php", data)
+        axios.post(Config.API_HOST + "login.php", data)
                     .then(result => {
                        if(result.data.isLog === true){
                         SessionService.setLogin();
                         SessionService.setCustomer(JSON.stringify(result.data.customerInfo[0]));
                        
-                        axios.get("http://autoexpress.gabways.com/api/driver.php/"+result.data.customerInfo[0].PK)
+                        axios.get(Config.API_HOST + "driver.php/"+result.data.customerInfo[0].PK)
                         .then(result => {
                             if(result.data.response.length !== 0) SessionService.setDriver();
                         });
