@@ -97,21 +97,36 @@ class City extends Component {
         return(
            
             <div className="container">
-            
-           <div className="form-inline"> 
-            
-            <InputIcone value={selected.cityName} id="cityName" labelName="Ville" placeholder="Ville" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
-            <button   onClick={() => this.onToSubmit()}>{buttonValue}</button>
+            <div className="d-flex justify-content-center h-100">
+                <div>
+                    <div className="form-inline"> 
+                        <InputIcone value={selected.cityName} id="cityName" labelName="" placeholder="Ville" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
+                        <button   onClick={() => this.onToSubmit()}>{buttonValue}</button>
+                    </div>
+                    <div>
+                        <table className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>Brand</td><td></td><td></td> 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {data.map((x) => 
+                                    <tr>
+                                        <td className="item-description">{x.cityName}</td>
+                                        <td><button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button></td> 
+                                        <td><button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>  
+                </div>
            
-           </div>
             <ul className="list-item">
-                {data.map((x) => 
-                     <li key={x.PK} >
-                        <span className="item-description">{x.cityName}</span>
-                        <button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button> 
-                        <button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></li>
-                )}
+                
             </ul>
+            </div>
             </div>
            
         )

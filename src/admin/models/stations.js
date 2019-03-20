@@ -1,6 +1,7 @@
 import {default as axios} from 'axios';
+import Config from '../../config';
 
-const API = "http://autoexpress.gabways.com/api/station.php";
+const API = Config.API_HOST + "station.php";
 //const API = "http://localhost/autoexpress/api/station"
 
 export function onFetchData(){

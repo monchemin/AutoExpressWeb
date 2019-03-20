@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 
 
-import {InputIcone, InputIconeBlur, AlertError} from '../common/formComponent';
-import {onFetchData, toSubmit, AddDriver} from './model';
+import {InputIcone, AlertError, AlertSuccess} from '../common/formComponent';
+import {onFetchData, AddDriver} from './model';
 import { Driver } from '../common/entities';
 import {ChangePropertyValue, yearValidation, isObjectComplete} from '../common/functionRepositoy';
 import * as SessionService from '../common/SessionService';
+import Config from '../config';
 
 
 
@@ -35,16 +35,16 @@ class DriverRegistration extends Component{
     
     componentWillMount(){
        
-        axios.get("http://autoexpress.gabways.com/api/carModel.php")
+        axios.get(Config.API_HOST +  "carModel.php")
                                 .then(result => {this.carModels = result.data.response});
         
-        axios.get("http://autoexpress.gabways.com/api/carBrand.php")
+        axios.get(Config.API_HOST + "carBrand.php")
                                 .then(result => {
                                     this.carBrands =  result.data.response;
                                     this.brandChoice(0);
                                  });
                                    
-        axios.get("http://autoexpress.gabways.com/api/carColor.php")
+        axios.get(Config.API_HOST + "carColor.php")
                                 .then(result => {this.carColors =  result.data.response}); 
         
     }
@@ -78,8 +78,6 @@ class DriverRegistration extends Component{
             this.setState({ error: {"code":true, "message": "Invalid information"}});
             return;
         }
-       
-        console.log(this.state.selected)
         this.doChangeData("POST", this.state.selected);
     }
     doChangeData(method, element){
@@ -165,7 +163,7 @@ class DriverRegistration extends Component{
 
         if(isRegistered===true) {
             return (
-                <AlertError message="Enregistrement effectuee"/>
+                <AlertSuccess message="Enregistrement effectuee"/>
             )
         }
         

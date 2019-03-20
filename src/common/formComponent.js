@@ -22,7 +22,7 @@ const InputPage = (props) => {
 }
 
 const InputIcone = (props) => {
-    const {id, labelName, placeholder, value, type} = props;
+    const {id, labelName, placeholder, value, type, list} = props;
     
     return(
         <div className="input-group">
@@ -32,6 +32,7 @@ const InputIcone = (props) => {
           </span>
         </div>
         <input type={type}
+               list={list}
                className="form-control" 
                placeholder={placeholder} 
                aria-label={labelName} 
@@ -106,5 +107,41 @@ const AlertError = (props) => {
 </div>
   )
 }
+const AlertSuccess = (props) => {
+  return(
+    <div className="alert alert-success">
+     {props.message}
+</div>
+  )
+}
 
-export {InputPage, InputNext, InputIcone, SelectPage, AlertError, InputIconeBlur};
+
+const RouteDisplay = (props) =>{
+        
+  return(
+      <table className="table table-hover">
+      <thead>
+          <tr>
+              <td>Date</td><td>Heure</td><td>Depart</td><td>Arrivee</td><td>Montant</td><td>Place</td> 
+          </tr>
+      </thead>
+      <tbody>
+      {props.routes.map(route=> {
+          return (<tr key={route.PK}>
+                      <td>{route.routeDate}</td>
+                      <td>{route.hour}</td>
+                      <td>{route.fZone} / {route.fStation}</td>
+                      <td>{route.tZone} / {route.tStation}</td>
+                      <td>{route.routePrice}</td>
+                      <td>{route.remaningPlace}</td>
+                 </tr>)}) }
+      </tbody>
+  </table>  
+     
+  )
+
+
+}
+
+
+export {InputPage, InputNext, InputIcone, SelectPage, AlertError, InputIconeBlur, AlertSuccess, RouteDisplay};

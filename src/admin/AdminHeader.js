@@ -17,8 +17,8 @@ class AdminHeader extends Component {
     <li><NavLink  activeClassName="active" to="/admin/zone">Zones</NavLink></li>
     <li><NavLink  activeClassName="active" to="/admin/station">Station</NavLink></li>
     <li><NavLink  activeClassName="active" to="/admin/hour">Time</NavLink></li>
-    <li><NavLink  activeClassName="active rigth" to="/admin/admins">Admins</NavLink></li>
-    <li><NavLink  activeClassName="rigth" to="/">LogOut</NavLink></li>
+    <li className="right"><NavLink  activeClassName="active" to="/admin/admins">Admins</NavLink></li>
+    <li className="right"><NavLink  activeClassName="active" to="/">LogOut</NavLink></li>
 </ul>
 </div>
 

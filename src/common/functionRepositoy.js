@@ -6,7 +6,6 @@ export function isObjectComplete(obj) {
     if (typeof obj !== "object") return false;
     var ok = true;
     Object.values(obj).forEach(value => {
-        console.log(value);
        if (value === "") ok = false;
       });
 
@@ -32,5 +31,7 @@ export function  yearValidation(year) {
               return false;
               }
           return true;
-      } 
+      }
+    
   }
+  

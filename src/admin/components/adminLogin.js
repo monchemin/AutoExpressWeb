@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import '../adminlogin.css';
 import {InputIcone, AlertError } from '../../common/formComponent';
 import axios from 'axios';
+import Config from '../../config';
 
 
 class AdminLogin extends Component {
@@ -26,7 +27,7 @@ class AdminLogin extends Component {
                     "login": this.state.username,
                     "password": this.state.password
                     }
-        axios.post("http://autoexpress.gabways.com/api/adminlogin.php", data)
+        axios.post(Config.API_HOST + "adminlogin.php", data)
                     .then(response => {
                        if(response.data.isLog === true){
                         sessionStorage.setItem('isAdminLogged', true);

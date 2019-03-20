@@ -91,23 +91,34 @@ class PickupHour extends Component {
         return(
            
             <div className="container">
-            
-           <div className="register-form"> 
-            
-            <InputIcone value={selected.hour} id="hour" labelName="" placeholder="00h00" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
-            <InputIcone value={selected.displayOrder} id="displayOrder" labelName="" placeholder="order" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
-            <button   onClick={() => this.onToSubmit()}>{buttonValue}</button>
-           
-           </div>
-            <ul className="list-item">
-                {data.map((x) => 
-                     <li key={x.PK} >
-                        <span className="item-description">{x.hour}</span>
-                        <span className="item-description">{x.displayOrder}</span>
-                        <button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button> 
-                        <button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></li>
-                )}
-            </ul>
+            <div className="d-flex justify-content-center h-100">
+                <div>
+                    <div className="register-form">   
+                        <InputIcone value={selected.hour} id="hour" labelName="" placeholder="00h00" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
+                        <InputIcone value={selected.displayOrder} id="displayOrder" labelName="" placeholder="order" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
+                        <button   onClick={() => this.onToSubmit()}>{buttonValue}</button>
+                    </div>
+                    <div>
+                    <table className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td></td><td></td><td></td> 
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {data.map((x) => 
+                                <tr>
+                                    <td className="item-description">{x.hour}</td>
+                                    <td className="item-description">{x.displayOrder}</td>
+                                    <td><button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button></td>
+                                    <td><button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></td>
+                                </tr>
+                            )}
+                            </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
             </div>
            
         )

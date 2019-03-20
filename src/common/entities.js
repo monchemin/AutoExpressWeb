@@ -40,3 +40,15 @@ export function Hours(){
         times.displayOrder = 0;
         return times;
 }
+
+export function Routes() {
+        var route = {};
+        route.routeDate = new Date();
+        route.routePlace = "";
+        route.routePrice = "";
+        route.FK_Hour ="";
+        route.FK_Driver ="";
+        route.FK_DepartureStage="";
+        route.FK_ArrivalStage = "";
+        return route;
+}

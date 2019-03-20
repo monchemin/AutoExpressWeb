@@ -67,24 +67,23 @@ ul.list-item li {
   margin: 10px;
 }
 .button-modify {
-  padding: 5px;
-  margin: 5px;
+  padding: 0px;
+  margin: 0px;
 }
 .button-delete {
-  padding: 5px;
-  margin: 5px;
+  padding: 0px;
+  margin: 0px;
 }
 
-.button-validation {
-  
+.button-validation {  
   float: right;
 }
 
 .form-inline {  
   display: flex;
-  flex-flow: row wrap;
   align-items: center;
   padding: 50px 0 50px;
+  width: 100%;
 }
 
 .form-inline label {
@@ -104,8 +103,6 @@ ul.list-item li {
   border: solid 1px lightgray;
   display: inline-block;
 }
-
-
 
 .form-inline button {
   padding: 5px 20px 5px 20px;
@@ -154,8 +151,6 @@ ul.list-item li {
   display: inline-block;
 }
 
-
-
 .register-form button {
   padding: 5px 20px 5px 20px;
   background-color: dodgerblue;
@@ -176,4 +171,17 @@ ul.list-item li {
 }
 .register-form .form-control {
   width: 100px;
+}
+
+.box {
+  float: left;
+  width: 200px;
+  height: 100px;
+  margin: 1em;
+}
+.after-box {
+  clear: left;
+}
+[class*="col-"] {
+  margin-bottom: 15px;
 }

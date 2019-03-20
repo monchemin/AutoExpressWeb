@@ -1,6 +1,7 @@
 import {default as axios} from 'axios';
+import Config from '../../config';
 
-const API = "http://autoexpress.gabways.com/api/carcolor.php";
+const API = Config.API_HOST + "carcolor.php";
 //const API = "http://localhost/autoexpress/api/CarColor"
 
 export function onFetchData(){

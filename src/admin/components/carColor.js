@@ -94,21 +94,35 @@ class CarColor extends Component {
         return(
            
             <div className="container">
-            
-           <div className="form-inline"> 
-            
-            <InputIcone value={selected.colorName} id="colorName" labelName="Couleur" placeholder="couleur" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
-            <button   onClick={() => this.onToSubmit()}>{buttonValue}</button>
-           
-           </div>
-            <ul className="list-item">
-                {data.map((x) => 
-                     <li key={x.PK} >
-                        <span className="item-description">{x.colorName}</span>
-                        <button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button> 
-                        <button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></li>
-                )}
-            </ul>
+                <div className="d-flex justify-content-center h-100">
+                <div>
+                    <div className="form-inline">    
+                        <InputIcone value={selected.colorName} id="colorName" labelName="" placeholder="couleur" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
+                        <button   onClick={() => this.onToSubmit()}>{buttonValue}</button>
+                    </div>
+                    <div>
+                        <table className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>Color</td><td></td><td></td> 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {data.map((x) => 
+                                    <tr >
+                                        <td>{x.colorName}</td>
+                                        <td><button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button></td>
+                                        <td><button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                        <ul className="list-item">
+                           
+                        </ul>
+                </div>
+                </div>
             </div>
            
         )
