@@ -112,7 +112,7 @@ class RouteSearch extends Component{
                     {this.state.zoneRoutes.length !== 0 ?
                         <div>
                         <div className="d-flex justify-content-center  text-black">
-                            <div className="mx-3 my-3 bg-warning col"> correspondance de la zone  </div>
+                            <div className="mx-3 my-3 bg-warning col"> correspondance de la zone de depart  </div>
                         </div>
                         <div className="d-flex justify-content-center">
                             <div className="mx-4 my-4"><RouteDisplay routes={this.state.zoneRoutes}/> </div>
