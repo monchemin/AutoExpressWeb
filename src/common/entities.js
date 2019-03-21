@@ -52,3 +52,14 @@ export function Routes() {
         route.FK_ArrivalStage = "";
         return route;
 }
+
+export function InternalRoutes() {
+        var route = {};
+        route.fromStation = "";
+	route.toStation = "";
+	route.startDate = "";
+	route.endDate = "";
+ 	route.fromHour = "";
+  	route.toHour ="";
+        return route;
+}
