@@ -54,6 +54,16 @@ export function DefaultRoutes(){
   })
 }
 
+export function SearchRoutes(data) {
+  
+  return new Promise((resolver, reject) => {
+    axios.post(APISERACH, data)
+    .then(result => { resolver(result.data) }
+    )
+    .catch(error => console.log(error))
+  })
+}
+
 export function toSubmit(method, data){
         var axio;
         let dataToJson = JSON.stringify(data);
