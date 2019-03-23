@@ -63,3 +63,13 @@ export function InternalRoutes() {
   	route.toHour ="";
         return route;
 }
+
+export function MakeStation() {
+        var newObject = {};
+        newObject.PK = "";
+        newObject.stationName = "";
+        newObject.stationAddress = "";
+        newObject.FK_Zone = "";
+        newObject.stationDetail ="";
+        return newObject;
+}
