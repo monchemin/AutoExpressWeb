@@ -1,0 +1,38 @@
+# Node.js with React
+# Build a Node.js project that uses React.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '8.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
+# FTP Upload
+# FTP Upload
+- task: FtpUpload@1
+  inputs:
+    credentialsOption: inputs
+    #serverEndpoint: # Required when credentialsOption == ServiceEndpoint
+    serverUrl: ftp://gabways.com
+    username: gabways.com
+    password: gwzz@4520-LL
+    rootDirectory: $(Build.SourcesDirectory)/build
+    filePatterns: '**' 
+    remoteDirectory: '/SubDomains/autoexpressweb' 
+    clean: false 
+    cleanContents: false
+    overwrite: true 
+    preservePaths: true 
+    trustSSL: true
