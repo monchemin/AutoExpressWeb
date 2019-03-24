@@ -4,13 +4,14 @@ import {onFetchData as fetchZones} from '../models/zones';
 import {onFetchData, toSubmit} from '../models/stations';
 import {InputIcone, AlertError} from '../../common/formComponent';
 import {ChangePropertyValue} from '../../common/functionRepositoy';
+import {MakeStation} from '../../common/entities';
 
 
 class Zone extends Component {
 
     constructor(propos) {
         super(propos);
-        this.instance = this.createObject()
+        this.instance = MakeStation()
         this.state = {
             selected: this.instance,
             cities: [],
@@ -30,14 +31,6 @@ class Zone extends Component {
         this.fetchData();
     }
 
-    createObject(){
-        var newObject = {};
-        newObject.PK = "";
-        newObject.stationName = "";
-        newObject.stationAddress = "";
-        newObject.FK_Zone = "";
-        return newObject;
-    }
 
     fetchData() {
         fetchCities().then(data => {
@@ -126,11 +119,12 @@ class Zone extends Component {
             this.setState({
                 "selected": this.instance
             }) }
+            
         this.doChangeData(method, this.state.selected);
     }
     doChangeData(method, element){
         toSubmit(method, element).then(data => {
-            this.instance = this.createObject()
+            this.instance = MakeStation();
            
             this.setState({
                 stations: data.response,
@@ -191,6 +185,7 @@ class Zone extends Component {
                         {this.zonesList()}
                         <InputIcone value={selected.stationName} id="stationName" labelName="Station" placeholder="station" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
                         <InputIcone value={selected.stationAddress} id="stationAddress" labelName="Adresse" placeholder="Adresse" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
+                        <InputIcone value={selected.stationDetail} id="stationDetail" labelName="Detail" placeholder="Plus de precision" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
                         <button  onClick={() => this.onToSubmit()}>{buttonValue}</button>   
                     </div>
                     <div>
@@ -204,6 +199,7 @@ class Zone extends Component {
                                 {currentStations.map((x) => 
                                     <tr>
                                         <td className="item-description">{x.stationName}({x.stationAddress})</td>
+                                        <td className="item-description">{x.stationDetail}</td>
                                         <td><button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button></td> 
                                         <td><button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></td>
                                     </tr>

@@ -1,6 +1,7 @@
 import React from "react";
 import { InputGroup, FormControl } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import {Link } from "react-router-dom";
 //import 'bootstrap/dist/css/bootstrap-theme.css';
 
 const InputPage = (props) => {
@@ -22,7 +23,7 @@ const InputPage = (props) => {
 }
 
 const InputIcone = (props) => {
-    const {id, labelName, placeholder, value, type, list} = props;
+    const {id, labelName, placeholder, value, type, list, disabled} = props;
     
     return(
         <div className="input-group">
@@ -38,7 +39,8 @@ const InputIcone = (props) => {
                aria-label={labelName} 
                aria-describedby={id}
                onChange={(event) => props.onChange(id, event.target.value )}
-               value={value}            
+               value={value}
+               disabled = {disabled}        
                 />
       </div>
     )
@@ -134,6 +136,7 @@ const RouteDisplay = (props) =>{
                       <td>{route.tZone} / {route.tStation}</td>
                       <td>{route.routePrice}</td>
                       <td>{route.remaningPlace}</td>
+                      <td><Link to={"/profil/reservation/" + route.PK + "/" +route.hour + "/" + route.fStation}>Reserver</Link></td>
                  </tr>)}) }
       </tbody>
   </table>  

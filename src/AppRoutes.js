@@ -18,6 +18,7 @@ import CustomerHeader from './customer/CustomerHeader';
 import DriverRegistration from './customer/DriverRegister';
 import RouteNotice from './customer/RouteNotice';
 import RouteSearch from './common/search';
+import Reservation from './customer/Reservation';
 
 
 
@@ -45,6 +46,7 @@ import RouteSearch from './common/search';
                 <CustomerRoute path='/profil/driver' component={DriverRegistration} />
                 <CustomerRoute path='/profil/notice' component={RouteNotice} />
                 <CustomerRoute path='/profil/search' component={RouteSearch} />
+                <CustomerRoute path='/profil/reservation/:id/:hd/:pd' component={Reservation}  />
                 
             </div>
         </Router> 
