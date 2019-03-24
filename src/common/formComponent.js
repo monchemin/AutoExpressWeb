@@ -23,7 +23,7 @@ const InputPage = (props) => {
 }
 
 const InputIcone = (props) => {
-    const {id, labelName, placeholder, value, type, list} = props;
+    const {id, labelName, placeholder, value, type, list, disabled} = props;
     
     return(
         <div className="input-group">
@@ -39,7 +39,8 @@ const InputIcone = (props) => {
                aria-label={labelName} 
                aria-describedby={id}
                onChange={(event) => props.onChange(id, event.target.value )}
-               value={value}            
+               value={value}
+               disabled = {disabled}        
                 />
       </div>
     )

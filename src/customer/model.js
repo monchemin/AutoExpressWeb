@@ -5,6 +5,8 @@ const API = Config.API_HOST + "customer.php";
 const APIDRIVER = Config.API_HOST + "driver.php";
 const APIROUTE = Config.API_HOST + "route.php";
 const APISERACH = Config.API_HOST + "internalroutes.php";
+const APIROUTEDETAIL = Config.API_HOST + "routedetails.php";
+const APIRESERVATION = Config.API_HOST + "reservation.php";
 //const API = "http://localhost/autoexpress/api/customer"
 
 export function onFetchData(){
@@ -64,6 +66,23 @@ export function SearchRoutes(data) {
   })
 }
 
+export function GetRouteDetail(PK) {
+  return new Promise((resolver, reject) => {
+    axios.get(APIROUTEDETAIL+"/"+PK)
+    .then(result => { resolver(result.data) }
+    )
+    .catch(error => console.log(error))
+  })
+}
+
+export function MakeReservation(data) {
+  return new Promise((resolver, reject) => {
+    axios.post(APIRESERVATION, data)
+    .then(result => { resolver(result.data) }
+    )
+    .catch(error => console.log(error))
+  })
+}
 export function toSubmit(method, data){
         var axio;
         let dataToJson = JSON.stringify(data);

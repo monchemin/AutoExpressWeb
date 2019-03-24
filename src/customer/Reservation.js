@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 import {InputIcone, AlertError, AlertSuccess} from '../common/formComponent';
-import {onFetchData, AddDriver} from './model';
+import {MakeReservation, GetRouteDetail} from './model';
 import { Driver } from '../common/entities';
 import {ChangePropertyValue, yearValidation, isObjectComplete} from '../common/functionRepositoy';
 import * as SessionService from '../common/SessionService';
@@ -17,44 +17,18 @@ class Reservation extends Component{
         super(props);
         this.instance = Driver()
         this.state = {
-            selected: this.instance,
-            data: [],
-            brands: [],
-            models: [],
-            buttonValue: "Ajouter",
+            placeError: false,
+            routeDetail: "",
+            buttonValue: "Valider",
             error: {"code":false, "message": ""}
-        }
-        
-        this.carModels = [];
-        this.carBrands = [];
-        this.carColors = [];
+        } 
     }
     
     componentWillMount(){
-       
-        axios.get(Config.API_HOST +  "carModel.php")
-                                .then(result => {this.carModels = result.data.response});
-        
-        axios.get(Config.API_HOST + "carBrand.php")
-                                .then(result => {
-                                    this.carBrands =  result.data.response;
-                                    this.brandChoice(0);
-                                 });
-                                   
-        axios.get(Config.API_HOST + "carColor.php")
-                                .then(result => {this.carColors =  result.data.response}); 
+        GetRouteDetail(this.props.match.params.id).then(data => this.setState({routeDetail: data.response[0]}));
         
     }
 
-    fetchData(){
-        onFetchData().then(data => { 
-         this.setState({
-            data: data.response,
-            isLoading: false
-        });
-    })  
-    }
-    
 
     onPropertyValueChange(property, value){
         
@@ -65,100 +39,37 @@ class Reservation extends Component{
         
     }
 
-    onPassWordChande(){
-        this.setState({"confirmation" : this.instance.customerPassword === this.instance.confirmation});
-    }
-
-    onToSubmit(){
-       
-        if( isObjectComplete(this.state.selected) === false) {
-            this.setState({ error: {"code":true, "message": "Invalid information"}});
-            return;
-        }
-        this.doChangeData("POST", this.state.selected);
-    }
-    doChangeData(method, element){
-        AddDriver(element).then(data => {
-            if(data.status === 200) {
-                this.setState({isRegistered: true});
-                SessionService.setDriver();
-            }
-        })
-    }
     
-    carYearValidation(property, value){  
+
+    onToSubmit(){ 
+       var data = {};
+       //data.PK = new Date().getFullYear() + this.state.routeDetail.PK + SessionService.getCustomerID();
+       data.place = this.state.place;
+       data.FK_Route = this.state.routeDetail.PK;
+       data.FK_Customer = SessionService.getCustomerID();
+       
+       MakeReservation(data).then(data=> this.setState({reservation: data.response}));   
+    }    
+    onPlaceChange(prop,value){  
         
-        if( yearValidation(value) ) {
-            this.onPropertyValueChange(property, value);
-            this.setState({ yearError: false });
+        if( !isNaN(value) && value <= this.state.routeDetail.remaningPlace ) {
+            
+            this.setState({ place: value,
+                            placeError: false  });
         }
         else {
-            this.setState({ yearError: true });
+            this.setState({ placeError: true });
         }
+    
     }
 
-    brandChoice(id) {
-        this.setState({models: this.carModels.filter(model => model.FK_brand === id ) })
-    }
-
-
-    brandList(){
-        return(
-        <div className = "input-group">
-            <div className="input-group-prepend">
-                <span className="input-group-text" id="brand-list">
-                    <i className="prefix"></i>
-                </span>
-            </div>  
-            <select className="browser-default custom-select" id="brand-list" onChange={(event) => this.brandChoice(event.target.value)}>
-                <option>Marque</option>
-                    {this.carBrands.map((brand) => {
-                            return <option key={brand.PK} value={brand.PK}>{brand.brandName}</option>
-                        })}
-            </select>
-        </div>
-        )
-    }
-
-    modelList(){
-        return(
-        <div className = "input-group">
-            <div className="input-group-prepend">
-                <span className="input-group-text" id="model-list">
-                    <i className="prefix"></i>
-                </span>
-            </div>  
-            <select className="browser-default custom-select" id="model-list" onChange={(event) => this.onPropertyValueChange("FK_carmodel", event.target.value)}>
-                <option>Modele</option>
-                    {this.state.models.map((brand) => {
-                            return <option key={brand.PK} value={brand.PK}>{brand.modelName}</option>
-                        })}
-            </select>
-        </div>
-        )
-    }
-
-    colorList(){
-        return(
-        <div className = "input-group">
-            <div className="input-group-prepend">
-                <span className="input-group-text" id="color-list">
-                    <i className="prefix"></i>
-                </span>
-            </div>  
-            <select className="browser-default custom-select" id="color-list" onChange={(event) => this.onPropertyValueChange("FK_carcolor", event.target.value)}>
-                <option>Couleur</option>
-                    {this.carColors.map((brand) => {
-                            return <option key={brand.PK} value={brand.PK}>{brand.colorName}</option>
-                        })}
-            </select>
-        </div>
-        )
-    }
+   
+    
+    
     render(){
-        const {selected, buttonValue, error, yearError, confirmation, emailValid, isRegistered} = this.state;
+        const {routeDetail, buttonValue, place, placeError, reservation, isRegistered} = this.state;
 
-        if(isRegistered===true) {
+        if(reservation !== undefined) {
             return (
                 <AlertSuccess message="Enregistrement effectuee"/>
             )
@@ -166,8 +77,23 @@ class Reservation extends Component{
         
          return(
             <div className="container">  
-           
-           <h1>{this.props.match.params.id}</h1>
+           <div className="d-flex justify-content-center  text-black">
+                    <div className="mx-3 my-3 bg-warning col"> Detail de l'itineraire </div>
+                </div>
+           <div className="d-flex justify-content-center  text-black">
+           <div className="register-form"> 
+                <InputIcone value={routeDetail.fZone + "/" + routeDetail.fStation}  labelName="Depart"  disabled="disabled" />
+                <InputIcone value={routeDetail.fstationDetail} disabled="disabled" />
+                <InputIcone value={routeDetail.tZone + "/" + routeDetail.tStation}  labelName="Point de Chute" disabled="disabled"/>
+                <InputIcone value={routeDetail.tstationDetail} disabled="disabled"/>
+                <InputIcone value={routeDetail.hour}  labelName="Heure" disabled="disabled"/>
+                <InputIcone value={routeDetail.routeDate} labelName="Date" disabled="disabled" />
+                <InputIcone value={routeDetail.routePrice} labelName="Prix" disabled="disabled" />
+                {placeError=== true ? <AlertError message="Nombre de places Invalide"/> : null }
+                <InputIcone value={place} id="place" labelName="Nombre de places" placeholder={"maximum " + routeDetail.remaningPlace}  onChange={(property, value) => this.onPlaceChange(property, value) } />
+                <button className="btn login_btn" onClick={() => this.onToSubmit()} >{buttonValue} </button>
+            </div>
+            </div>
             
             </div>
                    
