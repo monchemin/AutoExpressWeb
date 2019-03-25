@@ -25,12 +25,12 @@ steps:
   inputs:
     credentialsOption: inputs
     #serverEndpoint: # Required when credentialsOption == ServiceEndpoint
-    serverUrl: ftp://gabways.com
-    username: gabways.com
-    password: gwzz@4520-LL
+    serverUrl: $(testFtpServer)
+    username: $(testFtpUser)
+    password: $(testFtpPassword)
     rootDirectory: $(Build.SourcesDirectory)/build
     filePatterns: '**' 
-    remoteDirectory: '/SubDomains/autoexpressweb' 
+    remoteDirectory: $(testFtpTarget) 
     clean: false 
     cleanContents: false
     overwrite: true 
