@@ -96,8 +96,6 @@ class RouteSearch extends Component{
                         <div className="mx-2 my-2"> {this.stationData('fromStation', 'depart', 'De')} </div> 
                         <div className="mx-2 my-2" >{this.stationData('toStation', 'arrivee', 'A')} </div>
                     </div>
-                    
-                    
                     <div className="d-flex justify-content-center">
                         <div className="mx-2 my-2"> <InputIcone  id="startDate" type="date" labelName="Le" placeholder="date depart" onChange={(property, value) => this.onPropertyValueChange(property, value) } /></div>
                         <div className="mx-2 my-2"> {this.hourList('fromHour', 'Entre')} </div> 
