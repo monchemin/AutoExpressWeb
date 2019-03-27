@@ -20,7 +20,7 @@ export function onFetchData(){
 
 export function onLoginCheck(data){
   return new Promise((resolver, reject) => {
-    axios.post(API, data)
+    axios.post(API, data, Config.HEADER)
     .then(result => { resolver(result.data) }
     )
     .catch(error => console.log(error))
@@ -30,7 +30,7 @@ export function onLoginCheck(data){
 export function AddDriver(data){
   
   return new Promise((resolver, reject) => {
-    axios.post(APIDRIVER, data)
+    axios.post(APIDRIVER, data, Config.HEADER)
     .then(result => { resolver(result.data) }
     )
     .catch(error => console.log(error))
@@ -39,7 +39,7 @@ export function AddDriver(data){
 
 export function AddRoute(data){
   return new Promise((resolver, reject) => {
-    axios.post(APIROUTE, data)
+    axios.post(APIROUTE, data, Config.HEADER)
     .then(result => { resolver(result.data) }
     )
     .catch(error => console.log(error))
@@ -59,7 +59,7 @@ export function DefaultRoutes(){
 export function SearchRoutes(data) {
   
   return new Promise((resolver, reject) => {
-    axios.post(APISERACH, data)
+    axios.post(APISERACH, data, Config.HEADER)
     .then(result => { resolver(result.data) }
     )
     .catch(error => console.log(error))
@@ -77,7 +77,7 @@ export function GetRouteDetail(PK) {
 
 export function MakeReservation(data) {
   return new Promise((resolver, reject) => {
-    axios.post(APIRESERVATION, data)
+    axios.post(APIRESERVATION, data, Config.HEADER)
     .then(result => { resolver(result.data) }
     )
     .catch(error => console.log(error))
@@ -89,10 +89,10 @@ export function toSubmit(method, data){
         
         switch(method) {
             case "post":
-            axio = axios.post(API, dataToJson)
+            axio = axios.post(API, dataToJson, Config.HEADER)
             break
             case "put":
-            axio = axios.put(API, dataToJson)
+            axio = axios.put(API, dataToJson, Config.HEADER)
             break;
             case "del":
             axio = axios.delete(API+"/" + data.PK)

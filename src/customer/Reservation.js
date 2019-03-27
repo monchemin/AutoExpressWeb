@@ -4,9 +4,9 @@ import React, {Component} from 'react';
 import {InputIcone, AlertError, AlertSuccess} from '../common/formComponent';
 import {MakeReservation, GetRouteDetail} from './model';
 import { Driver } from '../common/entities';
-import {ChangePropertyValue, yearValidation, isObjectComplete} from '../common/functionRepositoy';
+import {ChangePropertyValue} from '../common/functionRepositoy';
 import * as SessionService from '../common/SessionService';
-import Config from '../config';
+
 
 
 
@@ -81,7 +81,7 @@ class Reservation extends Component{
     }
     
     render(){
-        const {routeDetail, buttonValue, place, placeError, reservation, isRegistered} = this.state;
+        const {routeDetail, buttonValue, place, placeError, reservation} = this.state;
 
         if(reservation !== undefined) {
             

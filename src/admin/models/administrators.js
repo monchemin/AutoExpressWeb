@@ -15,7 +15,7 @@ export function onFetchData(){
 
 export function onLoginCheck(data){
   return new Promise((resolver, reject) => {
-    axios.post(API, data)
+    axios.post(API, data, Config.HEADER)
     .then(result => { resolver(result.data) }
     )
     .catch(error => console.log(error))
@@ -25,13 +25,13 @@ export function onLoginCheck(data){
 export function toSubmit(method, data){
         var axio;
         let dataToJson = JSON.stringify(data);
-        console.log(dataToJson);
+        
         switch(method) {
             case "post":
-            axio = axios.post(API, dataToJson)
+            axio = axios.post(API, dataToJson, Config.HEADER)
             break
             case "put":
-            axio = axios.put(API, dataToJson)
+            axio = axios.put(API, dataToJson, Config.HEADER)
             break;
             case "del":
             axio = axios.delete(API+"/" + data.PK)
