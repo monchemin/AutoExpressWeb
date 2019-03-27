@@ -27,7 +27,7 @@ class AdminLogin extends Component {
                     "login": this.state.username,
                     "password": this.state.password
                     }
-        axios.post(Config.API_HOST + "adminlogin.php", data)
+        axios.post(Config.API_HOST + "adminlogin.php", data, Config.HEADER)
                     .then(response => {
                        if(response.data.isLog === true){
                         sessionStorage.setItem('isAdminLogged', true);
@@ -80,7 +80,7 @@ class AdminLogin extends Component {
                     <div className="card-footer">
                         
                         <div className="d-flex justify-content-center">
-                            <a href="#">Forgot your password?</a>
+                            Forgot your password?
                         </div>
                     </div>
                     

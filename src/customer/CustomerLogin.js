@@ -33,7 +33,7 @@ class CustomerLogin extends Component {
                     "login": this.state.username,
                     "password": this.state.password
                     }
-        axios.post(Config.API_HOST + "login.php", data)
+        axios.post(Config.API_HOST + "login.php", data, Config.HEADER)
                     .then(result => {
                        if(result.data.isLog === true){
                         SessionService.setLogin();

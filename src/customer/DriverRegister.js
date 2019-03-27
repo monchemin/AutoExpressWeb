@@ -159,7 +159,7 @@ class DriverRegistration extends Component{
         )
     }
     render(){
-        const {selected, buttonValue, error, yearError, confirmation, emailValid, isRegistered} = this.state;
+        const {selected, buttonValue, error, yearError, isRegistered} = this.state;
 
         if(isRegistered===true) {
             return (

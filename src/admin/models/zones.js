@@ -19,10 +19,10 @@ export function toSubmit(method, data){
        
         switch(method) {
             case "post":
-            axio = axios.post(API, dataToJson)
+            axio = axios.post(API, dataToJson, Config.HEADER)
             break
             case "put":
-            axio = axios.put(API, dataToJson)
+            axio = axios.put(API, dataToJson, Config.HEADER)
             break;
             case "del":
             axio = axios.delete(API+"/" + data.PK)
