@@ -96,12 +96,13 @@ class Reservation extends Component{
             <div className="d-flex justify-content-center  text-black">
                     <table className="table table-hover">
                         <tbody>
-                        <DisplayResult title="Numero Reservation" value={reservation.PK} />
-                        <DisplayResult title="Lieu de Rendez-vous" value={reservation.PK} />
-                        <DisplayResult title="Destination" value={reservation.PK} />
-                        <DisplayResult title="Heure" value={reservation.PK} />
-                        <DisplayResult title="Montant a payer (Veuillez avoir la monnaie exacte en main)" value={reservation.PK} />
-                        <DisplayResult title="Information sur le conducteur" value={reservation.PK} />
+                        <DisplayResult title="Numero Reservation" value={reservation.reservation} />
+                        <DisplayResult title="Lieu de Rendez-vous" value={reservation.fZone + "/" + reservation.fStation} />
+                        <DisplayResult title="Destination" value={reservation.tZone + "/" + reservation.tStation} />
+                        <DisplayResult title="Date / Heure" value={reservation.routeDate + "/" + reservation.hour} />
+                        <DisplayResult title="Montant a payer (Veuillez avoir la monnaie exacte en main)" value={reservation.routePrice} />
+                        <DisplayResult title="Voiture" value={reservation.brandName +"/"+reservation.modelName+"/ couleur: "+reservation.colorName} />
+                        <DisplayResult title="Conducteur" value={reservation.customerFistName +" "+reservation.customerLastName} />
                         <DisplayResult title="Information importante" value="Soyez au lieu du rendez-vous 10 minutes en avaance<br/>
                             Toute annulation 1h avant l'heure n'est pas remboursable" />
                         <DisplayResult title="Contact" value={reservation.PK} />
