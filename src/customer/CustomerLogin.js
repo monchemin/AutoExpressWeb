@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Redirect, NavLink, Link } from 'react-router-dom';
+import LoadingOverlay from 'react-loading-overlay';
 
 
 import axios from 'axios';
@@ -8,6 +9,7 @@ import '../admin/adminlogin.css';
 import {InputIcone, AlertError } from '../common/formComponent';
 import * as SessionService from '../common/SessionService';
 import Config from '../config';
+import GetMessage from '../messages';
 
 
 
@@ -19,7 +21,8 @@ class CustomerLogin extends Component {
             username: "",
             passsword: "",
             isLogged: false,
-            error: {"code":false, "message": ""}
+            error: {"code":false, "message": ""},
+            loading: false
         }
         
     }
@@ -33,6 +36,7 @@ class CustomerLogin extends Component {
                     "login": this.state.username,
                     "password": this.state.password
                     }
+        this.setState({loading: true});
         axios.post(Config.API_HOST + "login.php", data, Config.HEADER)
                     .then(result => {
                        if(result.data.isLog === true){
@@ -43,7 +47,7 @@ class CustomerLogin extends Component {
                         .then(result => {
                             if(result.data.response.length !== 0) SessionService.setDriver();
                         });
-                        this.setState({"isLogged": result.data.isLog});
+                        this.setState({isLogged: result.data.isLog, loading: false});
                        } 
                      } )
               
@@ -53,21 +57,16 @@ class CustomerLogin extends Component {
         this.setState({[property]: value});
        
     }
-    
-    render() {
-        const { isLogged, username, password, error } = this.state;
-        const { from } = this.props.location.state || { from: { pathname: "/profil" } };
-        
-    if(isLogged) {
-        return <Redirect to={from} />
-    }
+
+    MyRender(){
+        const {username, password, error } = this.state;
         return(
             
             <div className="container">  
                  <div className="d-flex justify-content-center h-100">
                  <div className="card">
                     <div className="card-header">
-                        <h3>Sign In</h3>
+                        <h3>{GetMessage('loginTitle')}</h3>
                         <div className="d-flex justify-content-end social_icon">
                             <span><i className="fab fa-facebook-square"></i></span>
                             <span><i className="fab fa-google-plus-square"></i></span>
@@ -104,6 +103,25 @@ class CustomerLogin extends Component {
                  
                     
         )
+    }
+    
+    render() {
+        const { isLogged} = this.state;
+        const { from } = this.props.location.state || { from: { pathname: "/profil" } };
+        
+    if(isLogged) {
+        return <Redirect to={from} />
+    }
+
+    return(
+        <LoadingOverlay
+            active={this.state.loading}
+            spinner
+            text='Loading your content...' >
+                {this.MyRender()}
+        </LoadingOverlay>
+        )
+        
     }
 }
 
