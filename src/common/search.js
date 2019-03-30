@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import Config from '../config';
+import GetMassage from '../messages';
+import LoadingOverlay from 'react-loading-overlay';
 
 import {DefaultRoutes, SearchRoutes} from '../customer/model';
 import {RouteDisplay} from './formComponent';
@@ -18,13 +20,16 @@ class RouteSearch extends Component{
             selected: this.instance,
             mainRoutes: [],
             zoneRoutes: [],
-            stations: [] }
+            stations: [],
+            loading: false }
         this.hours = [];
     }
 
     componentWillMount(){
+        this.setState({loading: true});
         DefaultRoutes().then(data => {
-            this.setState({mainRoutes: data.maindata.response}); }
+            this.setState({mainRoutes: data.maindata.response,
+            loading: false}); }
         )
         axios.get(Config.API_HOST + "pickuphour.php").then(result => {this.hours =  result.data.response;}); 
         axios.get(Config.API_HOST + "routestation.php").then(result => {this.setState({stations: result.data.response }) });
@@ -76,17 +81,18 @@ class RouteSearch extends Component{
     }
 
     onToSubmit() {
+        this.setState({loading: true})
         SearchRoutes(this.instance).then(data => {
             this.setState({
                 mainRoutes: data.maindata.response,
-                zoneRoutes: data.zonedata !== undefined ? data.zonedata.response : []
+                zoneRoutes: data.zonedata !== undefined ? data.zonedata.response : [],
+                loading: false
             })
         })
     }
 
-
-    render(){
-        return(
+    MyRender() {
+        return (
             <div className="container">
                 <div className="d-flex justify-content-center  text-black">
                     <div className="mx-3 my-3 bg-warning col"> Filter la recherche </div>
@@ -122,11 +128,19 @@ class RouteSearch extends Component{
                
                     
                 </div>
-            
-        )
+        );
     }
-        
-    
+    render(){
+        return(
+            <LoadingOverlay
+                active={this.state.loading}
+                spinner
+                text={GetMassage("loading")} >
+                    {this.MyRender()}
+            </LoadingOverlay>
+            )
+    }
+      
 }
 
 export default RouteSearch
