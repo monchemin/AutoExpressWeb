@@ -129,7 +129,7 @@ class Reservation extends Component{
                         <InputIcone value={routeDetail.routePrice} labelName="Prix" disabled="disabled" />
                         {placeError=== true ? <AlertError message="Nombre de places Invalide"/> : null }
                         <InputIcone value={place} id="place" labelName="Nombre de places" placeholder={"maximum " + routeDetail.remaningPlace}  onChange={(property, value) => this.onPlaceChange(property, value) } />
-                        <button className="btn login_btn" onClick={() => this.onToSubmit()} >{buttonValue} </button>
+                        <button className="btn login-btn" onClick={() => this.onToSubmit()} >{buttonValue} </button>
                     </div>
                 </div>
             

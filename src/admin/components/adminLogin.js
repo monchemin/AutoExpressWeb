@@ -73,7 +73,7 @@ class AdminLogin extends Component {
                             <InputIcone value={password} type="password" id="password" labelName="" placeholder="password" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
                             
                             <div className="form-group">
-                                <input type="button" value="Login" className="btn float-right login_btn" onClick={()=>{this.HandleClick()}} />
+                                <input type="button" value="Login" className="btn float-right login-btn" onClick={()=>{this.HandleClick()}} />
                             </div>
                         </form>
                     </div>

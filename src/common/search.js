@@ -93,32 +93,35 @@ class RouteSearch extends Component{
 
     MyRender() {
         return (
-            <div className="container">
-                <div className="d-flex justify-content-center  text-black">
-                    <div className="mx-3 my-3 bg-warning col"> Filter la recherche </div>
-                </div>
-                <div className="justify-content-center">
+            <div className="containerbox">
+                <div className="search-settings-box">
+                    <div className="d-flex">
+                        <div className="mx-3 my-3 col find-carpooling"> Trouver votre covoiturage </div>
+                        <div className="mx-3 my-3 text-white col"> Annoncer un depart </div>
+                    </div>
                     <div className="d-flex justify-content-center">
                         <div className="mx-2 my-2"> {this.stationData('fromStation', 'depart', 'De')} </div> 
                         <div className="mx-2 my-2" >{this.stationData('toStation', 'arrivee', 'A')} </div>
-                    </div>
-                    <div className="d-flex justify-content-center">
                         <div className="mx-2 my-2"> <InputIcone  id="startDate" type="date" labelName="Le" placeholder="date depart" onChange={(property, value) => this.onPropertyValueChange(property, value) } /></div>
                         <div className="mx-2 my-2"> {this.hourList('fromHour', 'Entre')} </div> 
                         <div className="mx-2 my-2"> {this.hourList('toHour', 'Et')} </div>
+                        <div className="mx-2 my-2"><button className="btn float-right search-btn" onClick={() => this.onToSubmit()} >Rechercher </button></div>
                     </div>
-                    <div className="d-flex justify-content-center">
-                        <div className="mx-4 my-4"><button className="btn float-right login_btn" onClick={() => this.onToSubmit()} >Rechercher </button></div>
-                    </div>
-                    <div className="d-flex justify-content-center">
+                </div>
+                <div className="d-flex text-black">
+                    <div className="mx-3 my-3col search-result-title"> Les dernieres annonces </div>
+                </div>
+                <div className="justify-content-center">
+
+                    <div className="justify-content-center search-box">
                        <div className="mx-4 my-4">{this.state.mainRoutes.length !== 0 ? <RouteDisplay routes={this.state.mainRoutes}/> : "Pas de correspondance"}</div>
                     </div>
                     {this.state.zoneRoutes.length !== 0 ?
                         <div>
-                        <div className="d-flex justify-content-center  text-black">
-                            <div className="mx-3 my-3 bg-warning col"> correspondance de la zone de depart  </div>
+                        <div className="d-flex  text-black">
+                            <div className="mx-3 my-3col search-result-title"> correspondance de la zone de depart  </div>
                         </div>
-                        <div className="d-flex justify-content-center">
+                        <div className="d-flex justify-content-center search-box">
                             <div className="mx-4 my-4"><RouteDisplay routes={this.state.zoneRoutes}/> </div>
                         </div>
                         </div>

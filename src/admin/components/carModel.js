@@ -153,7 +153,7 @@ class CarModel extends Component {
                     <table className="table table-hover">
                             <thead>
                                 <tr>
-                                    <td>Color</td><td></td><td></td> 
+                                    <td>Modele</td><td></td><td></td> 
                                 </tr>
                             </thead>
                             <tbody>
