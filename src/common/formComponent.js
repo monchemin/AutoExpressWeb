@@ -136,7 +136,7 @@ const RouteDisplay = (props) =>{
                       <td>{route.tZone} / {route.tStation}</td>
                       <td>{route.routePrice}</td>
                       <td>{route.remaningPlace}</td>
-                      <td><Link to={"/profil/reservation/" + route.PK + "/" +route.hour + "/" + route.fStation}>Reserver</Link></td>
+                      <td><Link className="btn float-right search-btn" to={"/profil/reservation/" + route.PK + "/" +route.hour + "/" + route.fStation}>Reserver</Link></td>
                  </tr>)}) }
       </tbody>
   </table>  

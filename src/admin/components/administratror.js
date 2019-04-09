@@ -77,6 +77,22 @@ class Administrator extends Component{
             this.setState({ loginError: data.loginExists });
         })
     }
+    handleClick(i){
+        this.instance = this.state.data.find((element) => {
+           return  element.PK === i
+        }) 
+       this.setState({
+            selected: this.instance,
+           buttonValue: "Modifier"
+       })
+    }
+    handleDelete(i) {
+        let toDelete = this.state.data.find((element) => {
+            return  element.PK === i
+         })
+        
+       this.doChangeData("del", toDelete);
+    }
     render(){
         const {data, isLoading, selected, buttonValue, error, loginError, confirmation} = this.state;
         if(isLoading) {
@@ -88,8 +104,8 @@ class Administrator extends Component{
              
             <div className="register-form"> 
             {error.code ? <AlertError message={error.message}/> : null }
-             <InputIcone value={selected.name} id="userName" labelName="name" placeholder="Name" onChange={(property, value) => this.onPropertyValueChange(property, value) } />
-             <InputIconeBlur value={selected.login} id="userLogin" labelName="login" placeholder="Login" onChange={(property, value) => this.onPropertyValueChange(property, value) } onBlur={()=>this.loginExist()}/>
+             <InputIcone value={selected.userName} id="userName" labelName="name" placeholder="Name" onChange={(property, value) => this.onPropertyValueChange(property, value) } />
+             <InputIconeBlur value={selected.userLogin} id="userLogin" labelName="login" placeholder="Login" onChange={(property, value) => this.onPropertyValueChange(property, value) } onBlur={()=>this.loginExist()}/>
              {loginError===true ? <AlertError message="Login already Exist / Please change it"/> : null }
              <InputIconeBlur value={selected.password} type="password" id="userPassword" labelName="password" placeholder="password" onChange={(property, value) => this.onPropertyValueChange(property, value) } onBlur={()=>this.onPassWordChande()} />
              {confirmation === false ? <AlertError message="confirmation error"/> : null }

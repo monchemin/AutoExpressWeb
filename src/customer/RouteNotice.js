@@ -168,7 +168,7 @@ class RouteNotice extends Component{
                         <InputIcone  id="routePrice" labelName="" placeholder="Montant" onChange={(property, value) => this.NumberValidation(property, value, 0, 1) } />
                         <InputIcone  id="routePlace" labelName="" placeholder="Nombre de places" onChange={(property, value) => this.NumberValidation(property, value, 3, 0) } />                          
                         {yearError===true ? <AlertError message="Montant Invalide"/> : null }
-                        <button className="btn float-right login_btn" onClick={() => this.onToSubmit()} >{buttonValue} </button>
+                        <button className="btn float-right login-btn" onClick={() => this.onToSubmit()} >{buttonValue} </button>
                     </div> 
                </div>    
            </div>

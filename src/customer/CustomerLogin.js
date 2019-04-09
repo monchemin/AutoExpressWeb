@@ -47,8 +47,9 @@ class CustomerLogin extends Component {
                         .then(result => {
                             if(result.data.response.length !== 0) SessionService.setDriver();
                         });
-                        this.setState({isLogged: result.data.isLog, loading: false});
+                        this.setState({isLogged: result.data.isLog});
                        } 
+                       this.setState({loading: false});
                      } )
               
     }
@@ -83,7 +84,7 @@ class CustomerLogin extends Component {
                             <InputIcone value={password} type="password" id="password" labelName="" placeholder="password" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
                             
                             <div className="form-group">
-                                <input type="button" value="Login" className="btn float-right login_btn" onClick={()=>{this.HandleClick()}} />
+                                <input type="button" value="Login" className="btn float-right login-btn" onClick={()=>{this.HandleClick()}} />
                             </div>
                         </form>
                     </div>

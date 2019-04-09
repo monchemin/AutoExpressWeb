@@ -14,8 +14,7 @@ code {
     monospace;
 }
 
-.container {
-  max-width: 1024px;
+.containerbox {
   min-height: 100vh;
   background: #f9f9f9;
   margin: 0 auto;
