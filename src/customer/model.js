@@ -49,7 +49,7 @@ export function AddRoute(data){
 export function DefaultRoutes(){
   
   return new Promise((resolver, reject) => {
-    axios.get(APISERACH)
+    axios.get(APISERACH, Config.HEADER)
     .then(result => { resolver(result.data) }
     )
     .catch(error => console.log(error))
@@ -68,7 +68,7 @@ export function SearchRoutes(data) {
 
 export function GetRouteDetail(PK) {
   return new Promise((resolver, reject) => {
-    axios.get(APIROUTEDETAIL+"/"+PK)
+    axios.get(APIROUTEDETAIL+"/"+PK, Config.HEADER)
     .then(result => { resolver(result.data) }
     )
     .catch(error => console.log(error))
