@@ -4,7 +4,7 @@ import ApplicationRoutes from './AppRoutes';
 
 
 import 'bootstrap/dist/css/bootstrap.css';
-import './index.css';
+import '../src/css/index.css';
 
 ReactDOM.render(
     

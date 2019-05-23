@@ -47,7 +47,7 @@ class Reservation extends Component{
        data.FK_Route = this.state.routeDetail.PK;
        data.FK_Customer = SessionService.getCustomerID();
        
-       MakeReservation(data).then(data=> this.setState({reservation: data.response[0]}));   
+       MakeReservation(data).then(result => this.setState({reservation: result.response[0]}));   
     }    
     onPlaceChange(prop,value){  
         

@@ -1,0 +1,171 @@
+/* Made with love by Mutiullah Samim*/
+
+
+
+
+
+.container{
+height: 100%;
+align-content: center;
+width: 100%;
+}
+
+.card{
+height: 100%;
+margin-top: auto;
+margin-bottom: auto;
+width: 400px;
+background-color: rgba(0,0,0,0.5) !important;
+margin: 50px 0px;
+}
+
+.social_icon span{
+font-size: 60px;
+margin-left: 10px;
+color: #FFC312;
+}
+
+.social_icon span:hover{
+color: white;
+cursor: pointer;
+}
+
+.card-header h3{
+color: white;
+}
+
+.social_icon{
+position: absolute;
+right: 20px;
+top: -45px;
+}
+
+.input-group-prepend span{
+
+background-color: #FFC312;
+color: black;
+border:0 !important;
+}
+
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
+
+}
+
+.remember{
+color: white;
+}
+
+.remember input
+{
+width: 20px;
+height: 20px;
+margin-left: 15px;
+margin-right: 5px;
+}
+
+.login-btn{
+color: black;
+background-color: #FFC312 !important;
+width: 100px;
+margin-top: 20px;
+}
+.search-btn{
+    color: black;
+    background-color: #FFC312 !important;
+    
+    }
+.space {
+    margin : 10px;
+}
+.login-btn:hover, .search-btn:hover{
+color: black;
+background-color: white;
+}
+
+.links{
+color: white;
+}
+
+.links a{
+margin-left: 4px;
+}
+.search-box{
+    background-color: white;
+    width: 98%;
+    border:solid 1px #f9f9f9;
+    border-radius:2px;
+    max-height: 50%;
+    display: inline-block;
+}
+.search-result-title{
+    margin: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    width: 98%;
+    float: left;
+    text-align: left;
+    padding-left: 30px;
+}
+.search-settings-box{
+    z-index: 100;
+    background-color: white;
+    width: 98%;
+    border:solid 1px #f9f9f9;
+    border-radius:2px;
+    display: inline-block;
+}
+.search-settings-box.params{
+    width: 100%;
+}
+.find-carpooling{
+    text-align: left;
+    color: #FFC312;
+    padding-left: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.find-carpooling:after{
+    content:url('../images/icon-location.png');
+    vertical-align: middle;
+    display: inline-block;
+}
+.make-departure{
+    text-align: left;
+    color: black;
+    padding-left: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.make-departure a {
+    color: black;
+}
+.make-departure a:hover {
+    color: #FFC312;
+    text-decoration: none; 
+}
+.make-departure:after{
+    content:url('../images/car-32.png');
+    vertical-align: middle;
+    display: inline-block;
+}
+.connexion{
+    text-align: left;
+    color: #FFC312;
+    padding-left: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.connexion a {
+    color: #FFC312;
+}
+.connexion a:hover {
+    color: #FFC312;
+    text-decoration: none; 
+}
+.connexion:after{
+    content:url('../images/icon-key-32.png');
+    vertical-align: middle;
+    display: inline-block;
+}

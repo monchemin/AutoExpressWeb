@@ -8,7 +8,6 @@ export function isLog() {
 
 export function setDriver() {
     sessionStorage.setItem('driver', true);
-    console.log("isdriver");
 }
 
 export function isDriver() {

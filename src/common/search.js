@@ -1,14 +1,19 @@
 import React, {Component} from 'react';
+import { NavLink } from "react-router-dom";
 import axios from 'axios';
 import Config from '../config';
-import GetMassage from '../messages';
+import GetMessage from '../messages';
 import LoadingOverlay from 'react-loading-overlay';
 
 import {DefaultRoutes, SearchRoutes} from '../customer/model';
 import {RouteDisplay} from './formComponent';
-import { InternalRoutes } from '../common/entities';
-import {InputIcone} from '../common/formComponent';
-import {ChangePropertyValue} from '../common/functionRepositoy';
+import { InternalRoutes } from './entities';
+import {InputIcone} from './formComponent';
+import {ChangePropertyValue} from './functionRepositoy';
+import SliderShow from './slider';
+
+
+import '../css/slider.css';
 
 
 class RouteSearch extends Component{
@@ -31,8 +36,8 @@ class RouteSearch extends Component{
             this.setState({mainRoutes: data.maindata.response,
             loading: false}); }
         )
-        axios.get(Config.API_HOST + "pickuphour.php").then(result => {this.hours =  result.data.response;}); 
-        axios.get(Config.API_HOST + "routestation.php").then(result => {this.setState({stations: result.data.response }) });
+        axios.get(Config.API_HOST + "pickup-hour.php").then(result => {this.hours =  result.data.response;}); 
+        axios.get(Config.API_HOST + "route-station.php").then(result => {this.setState({stations: result.data.response }) });
        
     }
 
@@ -94,10 +99,11 @@ class RouteSearch extends Component{
     MyRender() {
         return (
             <div className="containerbox">
+                <div><SliderShow></SliderShow></div>
                 <div className="search-settings-box">
                     <div className="d-flex">
                         <div className="mx-3 my-3 col find-carpooling"> Trouver votre covoiturage </div>
-                        <div className="mx-3 my-3 text-white col"> Annoncer un depart </div>
+                        <div className="mx-3 my-3 text-black col make-departure"><NavLink  activeClassName="active" to="/profil/notice">Annoncer un depart</NavLink> </div>
                     </div>
                     <div className="d-flex justify-content-center">
                         <div className="mx-2 my-2"> {this.stationData('fromStation', 'depart', 'De')} </div> 
@@ -138,7 +144,7 @@ class RouteSearch extends Component{
             <LoadingOverlay
                 active={this.state.loading}
                 spinner
-                text={GetMassage("loading")} >
+                text={GetMessage("LOADING")} >
                     {this.MyRender()}
             </LoadingOverlay>
             )
