@@ -107,17 +107,24 @@ margin-left: 4px;
     float: left;
     text-align: left;
     padding-left: 30px;
+    color: #0A1B28;
 }
 .search-settings-box{
-    z-index: 100;
+    z-index: 2;
     background-color: white;
     width: 98%;
     border:solid 1px #f9f9f9;
     border-radius:2px;
     display: inline-block;
+    margin-top: 10px;
+    position: relative;
 }
 .search-settings-box.params{
     width: 100%;
+}
+.search-result-header{
+    color: #0A1B28;
+    font-weight: bold;
 }
 .find-carpooling{
     text-align: left;
@@ -126,4 +133,67 @@ margin-left: 4px;
     font-size: 16px;
     font-weight: bold;
 }
-.find-carpooling::after {content: url(./locationpin.jpg)}
+.find-carpooling:after{
+    content:url('../images/icon-location.png');
+    vertical-align: middle;
+    display: inline-block;
+}
+.make-departure{
+    text-align: left;
+    color: #0A1B28;
+    padding-left: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.make-departure a {
+    color: #0A1B28;
+}
+.make-departure a:hover {
+    color: #FFC312;
+    text-decoration: none; 
+}
+.make-departure:after{
+    content:url('../images/car-32.png');
+    vertical-align: middle;
+    display: inline-block;
+}
+.header-label{
+    text-align: left;
+    padding-left: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+.connexion-label a {
+    color: #FFFFFF;
+}
+.connexion-label a:hover {
+    color: #FFC312;
+    text-decoration: none; 
+}
+
+.inscription-label a {
+    color: #FFC312;
+}
+.inscription-label a:hover {
+    color: #FFFFFF;
+    text-decoration: none; 
+}
+.header-band{
+    width: 100%;
+    background-color: #0A1B28;
+    height: 40px;
+}
+.header-band button {
+    color: #FFC312;
+    background: none;
+    border: 0px;
+}
+.card-header button:hover button:focus {
+    border: 0px;
+}
+.right{
+    float: right;
+}

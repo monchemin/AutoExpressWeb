@@ -2,11 +2,11 @@ import {default as axios} from 'axios';
 import Config from '../config';
 
 const API = Config.API_HOST + "customer.php";
-const APIDRIVER = Config.API_HOST + "driver.php";
-const APIROUTE = Config.API_HOST + "route.php";
-const APISERACH = Config.API_HOST + "internalroutes.php";
-const APIROUTEDETAIL = Config.API_HOST + "routedetails.php";
-const APIRESERVATION = Config.API_HOST + "reservation.php";
+const APIDRIVER = Config.API_HOST + "drivers.php";
+const APIROUTE = Config.API_HOST + "routes.php";
+const APISERACH = Config.API_HOST + "internal-routes.php";
+const APIROUTEDETAIL = Config.API_HOST + "route-details.php";
+const APIRESERVATION = Config.API_HOST + "reservations.php";
 //const API = "http://localhost/autoexpress/api/customer"
 
 export function onFetchData(){

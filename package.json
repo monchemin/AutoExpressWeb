@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.18.0",
-    "bootstrap": "^4.2.1",
+    "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
     "email-validator": "^2.0.4",
     "react": "^16.7.0",
     "react-bootstrap": "^1.0.0-beta.5",
@@ -13,6 +13,8 @@
     "react-loading-overlay": "^1.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.8",
+    "react-sidebar": "^3.0.2",
+    "react-slideshow-image": "^1.1.8",
     "react-spinner": "^0.2.7",
     "react-spinners": "^0.5.3"
   },
@@ -31,5 +33,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "homepage": "http://autoexpressweb.gabways.com"
+  "homepage": "http://test.toncopilote.com"
 }

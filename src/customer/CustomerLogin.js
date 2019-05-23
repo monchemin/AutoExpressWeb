@@ -5,7 +5,7 @@ import LoadingOverlay from 'react-loading-overlay';
 
 import axios from 'axios';
 
-import '../admin/adminlogin.css';
+import '../css/adminlogin.css';
 import {InputIcone, AlertError } from '../common/formComponent';
 import * as SessionService from '../common/SessionService';
 import Config from '../config';
@@ -37,13 +37,13 @@ class CustomerLogin extends Component {
                     "password": this.state.password
                     }
         this.setState({loading: true});
-        axios.post(Config.API_HOST + "login.php", data, Config.HEADER)
+        axios.post(Config.API_HOST + "login.php", data, Config.HEADER, Config.MAXREDIRECT)
                     .then(result => {
                        if(result.data.isLog === true){
                         SessionService.setLogin();
                         SessionService.setCustomer(JSON.stringify(result.data.customerInfo[0]));
                        
-                        axios.get(Config.API_HOST + "driver.php/"+result.data.customerInfo[0].PK)
+                        axios.get(Config.API_HOST + "drivers.php/"+result.data.customerInfo[0].PK, Config.MAXREDIRECT)
                         .then(result => {
                             if(result.data.response.length !== 0) SessionService.setDriver();
                         });
@@ -67,7 +67,7 @@ class CustomerLogin extends Component {
                  <div className="d-flex justify-content-center h-100">
                  <div className="card">
                     <div className="card-header">
-                        <h3>{GetMessage('loginTitle')}</h3>
+                        <h3>{GetMessage('SIGN_IN')}</h3>
                         <div className="d-flex justify-content-end social_icon">
                             <span><i className="fab fa-facebook-square"></i></span>
                             <span><i className="fab fa-google-plus-square"></i></span>
@@ -78,7 +78,7 @@ class CustomerLogin extends Component {
                     {error.code ? <AlertError message={error.message}/> : null }
                         <form>
                            
-                            
+     
                             <InputIcone value={username} type="text" id="username" labelName="" placeholder="username" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
                             <span className="space"></span>
                             <InputIcone value={password} type="password" id="password" labelName="" placeholder="password" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
@@ -108,17 +108,25 @@ class CustomerLogin extends Component {
     
     render() {
         const { isLogged} = this.state;
-        const { from } = this.props.location.state || { from: { pathname: "/profil" } };
+        //const { from } = this.props.location !== undefined ? this.props.location.state : { from: { pathname: "/" } };
+        //const { from } = this.props.location !== undefined ? this.props.location.state : { from: { pathname: "/" } };
         
     if(isLogged) {
-        return <Redirect to={from} />
+        //return <Redirect to={from} />
+        if(this.props.location !== undefined ) {
+            this.props.setSideBarOpen(true, this.props.location.state)
+        } else {
+            this.props.setSideBarOpen(false)
+        }
+       
+      
     }
 
     return(
         <LoadingOverlay
             active={this.state.loading}
             spinner
-            text='Loading your content...' >
+            text={GetMessage("LOGIN_LOADING")} >
                 {this.MyRender()}
         </LoadingOverlay>
         )

@@ -122,15 +122,15 @@ const RouteDisplay = (props) =>{
         
   return(
       <table className="table table-hover">
-      <thead>
-          <tr>
+      <thead >
+          <tr className="search-result-header">
               <td>Date</td><td>Heure</td><td>Depart</td><td>Arrivee</td><td>Montant</td><td>Place</td> 
           </tr>
       </thead>
       <tbody>
       {props.routes.map(route=> {
           return (<tr key={route.PK}>
-                      <td>{route.routeDate}</td>
+                      <td >{route.routeDate}</td>
                       <td>{route.hour}</td>
                       <td>{route.fZone} / {route.fStation}</td>
                       <td>{route.tZone} / {route.tStation}</td>
