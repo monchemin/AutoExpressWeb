@@ -48,6 +48,7 @@ import Dashboard from './dashboard/Dashboard';
                 <CustomerRoute path='/profil/notice' component={RouteNotice} />
                 <CustomerRoute path='/profil/search' component={RouteSearch} />
                 <CustomerRoute path='/profil/reservation/:id/:hd/:pd' component={Reservation}  />
+                <CustomerRoute path='/notice' component={RouteNotice} />
                 
             </div>
         </Router> 

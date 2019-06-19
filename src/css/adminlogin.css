@@ -186,14 +186,14 @@ margin-left: 4px;
     background-color: #0A1B28;
     height: 40px;
 }
-.header-band button {
-    color: #FFC312;
-    background: none;
-    border: 0px;
-}
+
 .card-header button:hover button:focus {
     border: 0px;
 }
 .right{
     float: right;
+}
+.overlay{
+    z-index: 100;
+    position: absolute;
 }

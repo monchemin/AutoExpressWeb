@@ -114,7 +114,8 @@ class CustomerLogin extends Component {
     if(isLogged) {
         //return <Redirect to={from} />
         if(this.props.location !== undefined ) {
-            this.props.setSideBarOpen(true, this.props.location.state)
+            //this.props.setSideBarOpen(true, this.props.location.state)
+            return(this.props.location)
         } else {
             this.props.setSideBarOpen(false)
         }
