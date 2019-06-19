@@ -14,6 +14,7 @@ import SliderShow from './slider';
 
 
 import '../css/slider.css';
+import RouteNotice from '../customer/RouteNotice';
 
 
 class RouteSearch extends Component{
@@ -103,7 +104,7 @@ class RouteSearch extends Component{
                 <div className="search-settings-box">
                     <div className="d-flex">
                         <div className="mx-3 my-3 col find-carpooling"> Trouver votre covoiturage </div>
-                        <div className="mx-3 my-3 text-black col make-departure"><NavLink  activeClassName="active" to="/profil/notice">Annoncer un depart</NavLink> </div>
+                        <div className="mx-3 my-3 text-black col make-departure"><NavLink  activeClassName="active" to="#" onClick={() => this.props.setSideBarOpen(true, <RouteNotice  />)}>Annoncer un depart</NavLink> </div>
                     </div>
                     <div className="d-flex justify-content-center">
                         <div className="mx-2 my-2"> {this.stationData('fromStation', 'depart', 'De')} </div> 

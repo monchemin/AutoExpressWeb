@@ -10,6 +10,7 @@ import {onFetchData, AddRoute} from './model';
 import { Routes } from '../common/entities';
 import {ChangePropertyValue, isObjectComplete} from '../common/functionRepositoy';
 import * as SessionService from '../common/SessionService';
+import CustomerLogin from './CustomerLogin';
 
 
 
@@ -151,7 +152,8 @@ class RouteNotice extends Component{
 
     render(){
         const { buttonValue, error, yearError, isRegistered} = this.state;
-               
+           if(SessionService.isLog())
+           {
          return(
             <div className="container"> 
             <div className="d-flex justify-content-center h-100">
@@ -178,6 +180,9 @@ class RouteNotice extends Component{
        </div>
             
          )
+           }else {
+               return (<CustomerLogin location={<RouteNotice />}/>)
+           }
      }
 }
 
