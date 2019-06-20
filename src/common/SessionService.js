@@ -20,7 +20,8 @@ export function setCustomer(customer) {
 }
 
 export function getCustomerID() {
-   return JSON.parse(sessionStorage.getItem('customer')).PK; 
+    let customer = JSON.parse(sessionStorage.getItem('customer'));
+   return customer !== undefined && customer !== null ? customer.PK : null; 
 }
 
 export function getCustomerName() {

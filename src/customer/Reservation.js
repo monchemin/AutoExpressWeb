@@ -6,6 +6,7 @@ import {MakeReservation, GetRouteDetail} from './model';
 import { Driver } from '../common/entities';
 import {ChangePropertyValue} from '../common/functionRepositoy';
 import * as SessionService from '../common/SessionService';
+import CustomerLogin from '../customer/CustomerLogin';
 
 
 
@@ -24,7 +25,11 @@ class Reservation extends Component{
     }
     
     componentWillMount(){
-        GetRouteDetail(this.props.match.params.id).then(data => this.setState({routeDetail: data.response[0]}));
+        //GetRouteDetail(this.props.match.params.id).then(data => this.setState({routeDetail: data.response[0]}));
+        if(SessionService.isLog()){
+            GetRouteDetail(this.props.id).then(data => this.setState({routeDetail: data.response[0]}));
+        }
+        
         
     }
 
@@ -82,7 +87,10 @@ class Reservation extends Component{
     
     render(){
         const {routeDetail, buttonValue, place, placeError, reservation} = this.state;
-
+        if(!SessionService.isLog()){
+            return (<CustomerLogin location={<Reservation id={this.props.id} />}/>)
+            }
+        
         if(reservation !== undefined) {
             
             return(

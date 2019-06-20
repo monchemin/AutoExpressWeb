@@ -121,7 +121,7 @@ class RouteSearch extends Component{
                 <div className="justify-content-center">
 
                     <div className="justify-content-center search-box">
-                       <div className="mx-4 my-4">{this.state.mainRoutes.length !== 0 ? <RouteDisplay routes={this.state.mainRoutes}/> : "Pas de correspondance"}</div>
+                       <div className="mx-4 my-4">{this.state.mainRoutes.length !== 0 ? <RouteDisplay routes={this.state.mainRoutes} setSideBarOpen={this.props.setSideBarOpen}/> : "Pas de correspondance"}</div>
                     </div>
                     {this.state.zoneRoutes.length !== 0 ?
                         <div>

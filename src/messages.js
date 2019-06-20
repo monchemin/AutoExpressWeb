@@ -6,7 +6,8 @@ const Messages = {
     RESERVATION: {fr: "Réserver", en: "Book"},
     BEEDRIVER: {fr: "Devenir Conducteur", en: "Driver Sign Up"},
     CREATE_ROUTE: {fr: "Annoncer un départ", en: "Make a route"},
-    LOGIN_LOADING: {fr: "Connexion en cours...", en: "Loading conection..."} 
+    LOGIN_LOADING: {fr: "Connexion en cours...", en: "Loading conection..."},
+    REGISTER_SUCCESS: {fr: "Enregistrement bien effectué", en: "you have been well registered"}  
 }
 
 

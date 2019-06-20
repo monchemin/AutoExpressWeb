@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
 import * as EmailValidator from 'email-validator';
 
-import {InputIcone, InputIconeBlur, AlertError} from '../common/formComponent';
+import {InputIcone, InputIconeBlur, AlertError, AlertSuccess} from '../common/formComponent';
 import {onFetchData, toSubmit, onLoginCheck} from './model';
 import { Customer } from '../common/entities';
 import {ChangePropertyValue} from '../common/functionRepositoy';
+import GetMessage from '../messages';
+import CustomerLogin from './CustomerLogin';
 
 
 
@@ -87,7 +89,10 @@ class CustomerRegistration extends Component{
 
         if(isRegistered===true) {
             return (
-                <Redirect to="/login"/>
+                <div className="container"> 
+                <AlertSuccess message={GetMessage("REGISTER_SUCCESS")} />
+                <NavLink to="#" className="active"  onClick={() => this.props.setSidebarOpen(true, <CustomerLogin setSideBarOpen={this.props.setSidebarOpen} />)} >{GetMessage("SIGN_IN")} </NavLink>
+                </div>
             )
         }
         

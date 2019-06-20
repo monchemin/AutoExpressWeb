@@ -53,7 +53,7 @@ class Dashboard extends Component {
             } 
 
         } else {
-            fisrtLink =  <NavLink to="#" className="active"  onClick={() => this.onSetSidebarOpen(true, <CustomerRegister />)} >{GetMessage("REGISTER")} </NavLink>            
+            fisrtLink =  <NavLink to="#" className="active"  onClick={() => this.onSetSidebarOpen(true, <CustomerRegister setSideBarOpen={this.onSetSidebarOpen} />)} >{GetMessage("REGISTER")} </NavLink>            
             secondLink =  <NavLink to="#" className="active"  onClick={() => this.onSetSidebarOpen(true, <CustomerLogin setSideBarOpen={this.onSetSidebarOpen} />)} >{GetMessage("SIGN_IN")} </NavLink>
             
         }
