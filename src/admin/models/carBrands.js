@@ -1,7 +1,7 @@
 import {default as axios} from 'axios';
 import Config from '../../config';
 
-const API = Config.API_HOST + "carbrand.php";
+const API = Config.API_HOST + "car-brands.php";
 //const API = "http://localhost/autoexpress/api/Carbrand"
 
 export function fetchCarbrand(){
@@ -24,7 +24,7 @@ export function toSubmit(method, data){
             axio = axios.put(API, dataToJson, Config.HEADER)
             break;
             case "del":
-            axio = axios.delete(API+"/" + data.PK)
+            axio = axios.delete(API+"/" + data.id)
             break;
             default:
             break;
