@@ -27,7 +27,7 @@ class AdminLogin extends Component {
                     "login": this.state.username,
                     "password": this.state.password
                     }
-        axios.post(Config.API_HOST + "adminlogin.php", data, Config.HEADER)
+        axios.post(Config.API_HOST + "admin-login.php", data, Config.HEADER)
                     .then(response => {
                        if(response.data.isLog === true){
                         sessionStorage.setItem('isAdminLogged', true);

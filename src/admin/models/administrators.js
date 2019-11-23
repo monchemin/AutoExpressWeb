@@ -1,8 +1,7 @@
 import {default as axios} from 'axios';
 import Config from '../../config';
 
-const API = Config.API_HOST + "user.php";
-//const API = "http://localhost/autoexpress/api/user"
+const API = Config.API_HOST + "users.php";
 
 export function onFetchData(){
   return new Promise((resolver, reject) => {
@@ -34,7 +33,7 @@ export function toSubmit(method, data){
             axio = axios.put(API, dataToJson, Config.HEADER)
             break;
             case "del":
-            axio = axios.delete(API+"/" + data.PK)
+            axio = axios.delete(API+"/" + data.userId)
             break;
             default:
             break;

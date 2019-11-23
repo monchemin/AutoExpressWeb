@@ -1,7 +1,7 @@
 import {getCustomerID} from './SessionService'
 export function admin() {
         var admin = {};
-        admin.PK = "";
+        admin.userId = "";
         admin.userName = "";
         admin.userLogin = "";
         admin.userPassword = "";

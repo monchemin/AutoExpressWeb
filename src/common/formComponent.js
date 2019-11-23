@@ -48,7 +48,7 @@ const InputIcone = (props) => {
 }
 
 const InputIconeBlur = (props) => {
-  const {id, labelName, placeholder, value} = props;
+  const {id, labelName, placeholder, value, type} = props;
   
   return(
       <div className="input-group">
@@ -57,7 +57,7 @@ const InputIconeBlur = (props) => {
           <i className="prefix">{labelName}</i>
         </span>
       </div>
-      <input type="text" 
+      <input type={type} 
              className="form-control" 
              placeholder={placeholder} 
              aria-label={labelName} 

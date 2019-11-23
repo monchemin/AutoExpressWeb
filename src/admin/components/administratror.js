@@ -27,7 +27,7 @@ class Administrator extends Component{
     }
 
     fetchData(){
-        onFetchData().then(data => {; 
+        onFetchData().then(data => { 
          this.setState({
             data: data.response,
             isLoading: false
@@ -59,7 +59,7 @@ class Administrator extends Component{
             return;
         }
         var method = "post"
-        if(this.state.selected.PK) method = "put";
+        if(this.state.selected.userId) method = "put";
         this.doChangeData(method, this.state.selected);
     }
     doChangeData(method, element){
@@ -79,7 +79,7 @@ class Administrator extends Component{
     }
     handleClick(i){
         this.instance = this.state.data.find((element) => {
-           return  element.PK === i
+           return  element.userId === i
         }) 
        this.setState({
             selected: this.instance,
@@ -88,7 +88,7 @@ class Administrator extends Component{
     }
     handleDelete(i) {
         let toDelete = this.state.data.find((element) => {
-            return  element.PK === i
+            return  element.userId === i
          })
         
        this.doChangeData("del", toDelete);
@@ -104,8 +104,8 @@ class Administrator extends Component{
              
             <div className="register-form"> 
             {error.code ? <AlertError message={error.message}/> : null }
-             <InputIcone value={selected.userName} id="userName" labelName="name" placeholder="Name" onChange={(property, value) => this.onPropertyValueChange(property, value) } />
-             <InputIconeBlur value={selected.userLogin} id="userLogin" labelName="login" placeholder="Login" onChange={(property, value) => this.onPropertyValueChange(property, value) } onBlur={()=>this.loginExist()}/>
+             <InputIcone value={selected.userName} id="userName" labelName="name" placeholder="Name" type="text" onChange={(property, value) => this.onPropertyValueChange(property, value) } />
+             <InputIconeBlur value={selected.userLogin} id="userLogin" labelName="login" placeholder="Login" type="text" onChange={(property, value) => this.onPropertyValueChange(property, value) } onBlur={()=>this.loginExist()}/>
              {loginError===true ? <AlertError message="Login already Exist / Please change it"/> : null }
              <InputIconeBlur value={selected.password} type="password" id="userPassword" labelName="password" placeholder="password" onChange={(property, value) => this.onPropertyValueChange(property, value) } onBlur={()=>this.onPassWordChande()} />
              {confirmation === false ? <AlertError message="confirmation error"/> : null }
@@ -116,10 +116,13 @@ class Administrator extends Component{
             </div>
              <ul className="list-item">
                  {data.map((x) => 
-                      <li key={x.PK} >
+                      <li key={x.userId} >
                          <span className="item-description">{x.userName}</span>
-                         <button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button> 
-                         <button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></li>
+                         <div className ="right-pos">
+                            <button className="button-modify" onClick={() => this.handleClick(x.userId)}>Modifier</button> 
+                            <button className="button-delete" onClick={() => this.handleDelete(x.userId)}>Supprimer</button>
+                         </div>
+                    </li>
                  )}
              </ul>
              </div>
