@@ -3,6 +3,12 @@ import { NavLink } from "react-router-dom";
 
 
 class AdminHeader extends Component {
+
+    logOut()
+    {
+        sessionStorage.clear();
+        //this.setState({isLogged: false});
+    }
     
     render() {
        
@@ -18,7 +24,7 @@ class AdminHeader extends Component {
     <li><NavLink  activeClassName="active" to="/admin/station">Station</NavLink></li>
     <li><NavLink  activeClassName="active" to="/admin/hour">Time</NavLink></li>
     <li className="right"><NavLink  activeClassName="active" to="/admin/admins">Admins</NavLink></li>
-    <li className="right"><NavLink  activeClassName="active" to="/">LogOut</NavLink></li>
+    <li className="right"><NavLink  activeClassName="active" to="#" onClick={()=> this.logOut()}>LogOut</NavLink></li>
 </ul>
 </div>
 
