@@ -32,7 +32,7 @@ class Carbrand extends Component {
     }
     createBrandObject(){
         var newObject = {};
-        newObject.PK = "";
+        newObject.id = "";
         newObject.brandName = "";
         return newObject;
     }
@@ -52,7 +52,7 @@ class Carbrand extends Component {
     }
     handleClick(i){
         this.car = this.state.data.find((element) => {
-           return  element.PK === i
+           return  element.id === i
         }) 
        this.setState({
             selected: this.car,
@@ -61,7 +61,7 @@ class Carbrand extends Component {
     }
     handleDelete(i) {
         let toDelete = this.state.data.find((element) => {
-            return  element.PK === i
+            return  element.id === i
          })
         
        this.doChangeData("del", toDelete);
@@ -76,7 +76,7 @@ class Carbrand extends Component {
        
         if(this.state.selected.brandName ==="") return;
         var method = "post"
-        if(this.state.selected.PK) method = "put";
+        if(this.state.selected.id) method = "put";
         this.doChangeData(method, this.state.selected);
     }
     doChangeData(method, element){
@@ -106,17 +106,13 @@ class Carbrand extends Component {
                     </div>
                     <div>
                         <table className="table table-hover">
-                            <thead>
-                                <tr>
-                                    <td>Brand</td><td></td><td></td> 
-                                </tr>
-                            </thead>
+                           
                             <tbody>
                                 {data.map((x) => 
                                     <tr>
                                         <td>{x.brandName}</td>
-                                        <td><button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button></td> 
-                                        <td><button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></td>
+                                        <td><button className="button-modify" onClick={() => this.handleClick(x.id)}>Modifier</button></td> 
+                                        <td><button className="button-delete" onClick={() => this.handleDelete(x.id)}>Supprimer</button></td>
                                     </tr>
                                 )}
                             </tbody>

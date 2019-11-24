@@ -59,22 +59,25 @@ ul.list-item{
 ul.list-item li {
   border-bottom: solid 1px #333;
   margin: 5px;
+  display: inline-block;
+  width: 100%;
 }
 .item-description {
   padding: 10px;
   font: bold;
   margin: 10px;
+  vertical-align: middle;
 }
 .button-modify {
-  padding: 0px;
-  margin: 0px;
+  padding: 5px;
+  margin: 5px;
 }
 .button-delete {
-  padding: 0px;
-  margin: 0px;
+  padding: 5px;
+  margin: 5px;
 }
 
-.button-validation {  
+.button-validation, .right-pos {  
   float: right;
 }
 

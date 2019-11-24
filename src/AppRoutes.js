@@ -19,14 +19,14 @@ import DriverRegistration from './customer/DriverRegister';
 import RouteNotice from './customer/RouteNotice';
 import RouteSearch from './common/search';
 import Reservation from './customer/Reservation';
-import Dashboard from './dashboard/Dashboard';
+//import Dashboard from './dashboard/Dashboard';
 
 
 
   const  ApplicationRoutes = () => (  
         <Router>
             <div>      
-                <Route exact path='/' component={Dashboard} />
+                <Route exact path='/' component={AdminHeader} />
                 <Route   path='/dashboard' component={DashboardHeader} />
                 <DefaultRoute    path='/search' component={RouteSearch} />
                 <AdminRoute  path='/admin' component={AdminHeader} />
