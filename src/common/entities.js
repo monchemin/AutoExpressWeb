@@ -35,7 +35,7 @@ export function Driver() {
 
 export function Hours(){
         var times = {};
-        times.PK = "";
+        times.id = "";
         times.hour = "";
         times.displayOrder = 0;
         return times;
