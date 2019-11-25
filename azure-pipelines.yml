@@ -28,12 +28,12 @@ steps:
   inputs:
     credentialsOption: inputs
     #serverEndpoint: # Required when credentialsOption == ServiceEndpoint
-    serverUrl: $(server)
-    username: $(username)
-    password: $(secret)
+    serverUrl: $(AWS_FTP_SERVER)
+    username: $(AWS_USER)
+    password: $(AWS_PASS)
     rootDirectory: $(Build.SourcesDirectory)/build
     filePatterns: '**' 
-    remoteDirectory: $(folder) 
+    remoteDirectory: $(AWS_WEB_FOLDER) 
     clean: false 
     cleanContents: false
     overwrite: true 
