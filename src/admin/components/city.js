@@ -33,7 +33,7 @@ class City extends Component {
     }
     createObject(){
         var newObject = {};
-        newObject.PK = "";
+        newObject.id = "";
         newObject.cityName = "";
         return newObject;
     }
@@ -49,7 +49,7 @@ class City extends Component {
     }
     handleClick(i){
         this.instance = this.state.data.find((element) => {
-           return  element.PK === i
+           return  element.id === i
         }) 
        this.setState({
             selected: this.instance,
@@ -58,17 +58,12 @@ class City extends Component {
     }
     handleDelete(i) {
         let toDelete = this.state.data.find((element) => {
-            return  element.PK === i
+            return  element.id === i
          })
         
        this.doChangeData("del", toDelete);
     }
-  /*  handleChange(event){
-            this.ChangePropertyValue(this.instance, "colorName", event.target.value)
-            this.setState({
-                "selected": this.instance
-            })
-    }*/
+
     onToSubmit(){
        
         if(this.state.selected.cityName ==="") {
@@ -76,7 +71,7 @@ class City extends Component {
             return;
         }
         var method = "post"
-        if(this.state.selected.PK) method = "put";
+        if(this.state.selected.id) method = "put";
         this.doChangeData(method, this.state.selected);
     }
     doChangeData(method, element){
@@ -105,17 +100,13 @@ class City extends Component {
                     </div>
                     <div>
                         <table className="table table-hover">
-                            <thead>
-                                <tr>
-                                    <td>Brand</td><td></td><td></td> 
-                                </tr>
-                            </thead>
+                           
                             <tbody>
                                 {data.map((x) => 
                                     <tr>
                                         <td className="item-description">{x.cityName}</td>
-                                        <td><button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button></td> 
-                                        <td><button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></td>
+                                        <td><button className="button-modify" onClick={() => this.handleClick(x.id)}>Modifier</button></td> 
+                                        <td><button className="button-delete" onClick={() => this.handleDelete(x.id)}>Supprimer</button></td>
                                     </tr>
                                 )}
                             </tbody>

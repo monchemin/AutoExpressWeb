@@ -43,7 +43,7 @@ class PickupHour extends Component {
     }
     handleClick(i){
         this.instance = this.state.data.find((element) => {
-           return  element.PK === i
+           return  element.id === i
         }) 
        this.setState({
             selected: this.instance,
@@ -52,7 +52,7 @@ class PickupHour extends Component {
     }
     handleDelete(i) {
         let toDelete = this.state.data.find((element) => {
-            return  element.PK === i
+            return  element.id === i
          })
         
        this.doChangeData("del", toDelete);
@@ -70,7 +70,7 @@ class PickupHour extends Component {
             return;
         }
         var method = "post"
-        if(this.state.selected.PK) method = "put";
+        if(this.state.selected.id) method = "put";
         this.doChangeData(method, this.state.selected);
     }
     doChangeData(method, element){
@@ -110,8 +110,8 @@ class PickupHour extends Component {
                                 <tr>
                                     <td className="item-description">{x.hour}</td>
                                     <td className="item-description">{x.displayOrder}</td>
-                                    <td><button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button></td>
-                                    <td><button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></td>
+                                    <td><button className="button-modify" onClick={() => this.handleClick(x.id)}>Modifier</button></td>
+                                    <td><button className="button-delete" onClick={() => this.handleDelete(x.id)}>Supprimer</button></td>
                                 </tr>
                             )}
                             </tbody>

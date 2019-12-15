@@ -28,9 +28,9 @@ class Zone extends Component {
 
     createObject(){
         var newObject = {};
-        newObject.PK = "";
+        newObject.id = "";
         newObject.zoneName = "";
-        newObject.FK_City = "";
+        newObject.fkCity = "";
         return newObject;
     }
 
@@ -51,7 +51,7 @@ class Zone extends Component {
     }
     onParentSelect(FK) {
         
-        let currentZones = this.state.zones.filter(zone => zone.FK_City === FK);
+        let currentZones = this.state.zones.filter(zone => zone.fkCity === FK);
         this.setState({
             currentZones: currentZones,
             currentCity: FK
@@ -59,7 +59,7 @@ class Zone extends Component {
     }
     handleClick(i){
         this.instance = this.state.currentZones.find((element) => {
-           return  element.PK === i
+           return  element.id === i
         }) 
        this.setState({
             selected: this.instance,
@@ -68,7 +68,7 @@ class Zone extends Component {
     }
     handleDelete(i) {
         let toDelete = this.state.currentZones.find((element) => {
-            return  element.PK === i
+            return  element.id === i
          })
         
        this.doChangeData("del", toDelete);
@@ -92,10 +92,10 @@ class Zone extends Component {
             return;
         } 
         var method = "post"
-        if(this.state.selected.PK) {
+        if(this.state.selected.id) {
             method = "put";
         }
-        else { ChangePropertyValue(this.instance, "FK_City", this.state.currentCity)
+        else { ChangePropertyValue(this.instance, "fkCity", this.state.currentCity)
             this.setState({
                 "selected": this.instance
             }) }
@@ -124,7 +124,7 @@ class Zone extends Component {
             <select className="browser-default custom-select" id="city-list" onChange={(event) => this.onParentSelect(event.target.value)}>
                 <option>Choose your option</option>
                     {this.state.cities.map((city) => {
-                            return <option key={city.PK} value={city.PK}>{city.cityName}</option>
+                            return <option key={city.id} value={city.id}>{city.cityName}</option>
                         })}
             </select>
         </div>
@@ -156,8 +156,8 @@ class Zone extends Component {
                                 {currentZones.map((x) => 
                                 <tr>
                                     <td className="item-description">{x.zoneName}</td>
-                                    <td><button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button></td> 
-                                    <td><button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></td>
+                                    <td><button className="button-modify" onClick={() => this.handleClick(x.id)}>Modifier</button></td> 
+                                    <td><button className="button-delete" onClick={() => this.handleDelete(x.id)}>Supprimer</button></td>
                                 </tr>
                                 )}
                             </tbody>

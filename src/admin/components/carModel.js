@@ -28,9 +28,9 @@ class CarModel extends Component {
 
     createObject(){
         var newObject = {};
-        newObject.PK = "";
+        newObject.id = "";
         newObject.modelName = "";
-        newObject.FK_brand = "";
+        newObject.fkBrand = "";
         return newObject;
     }
 
@@ -50,8 +50,7 @@ class CarModel extends Component {
         })
     }
     brandChoice(FK) {
-        
-        let currentModels = this.state.models.filter(model => model.FK_brand === FK);
+        let currentModels = this.state.models.filter(model => model.fkBrand === FK);
         this.setState({
             currentModels: currentModels,
             currentBrand: FK
@@ -59,7 +58,7 @@ class CarModel extends Component {
     }
     handleClick(i){
         this.instance = this.state.currentModels.find((element) => {
-           return  element.PK === i
+           return  element.id === i
         }) 
        this.setState({
             selected: this.instance,
@@ -68,7 +67,7 @@ class CarModel extends Component {
     }
     handleDelete(i) {
         let toDelete = this.state.currentModels.find((element) => {
-            return  element.PK === i
+            return  element.id === i
          })
         
        this.doChangeData("del", toDelete);
@@ -92,10 +91,10 @@ class CarModel extends Component {
             return;
         } 
         var method = "post"
-        if(this.state.selected.PK) {
+        if(this.state.selected.id) {
             method = "put";
         }
-        else { ChangePropertyValue(this.instance, "FK_brand", this.state.currentBrand)
+        else { ChangePropertyValue(this.instance, "fkBrand", this.state.currentBrand)
             this.setState({
                 "selected": this.instance
             }) }
@@ -124,7 +123,7 @@ class CarModel extends Component {
             <select className="browser-default custom-select" id="brand-list" onChange={(event) => this.brandChoice(event.target.value)}>
                 <option>Choose your option</option>
                     {this.state.brands.map((brand) => {
-                            return <option key={brand.PK} value={brand.PK}>{brand.brandName}</option>
+                            return <option key={brand.id} value={brand.id}>{brand.brandName}</option>
                         })}
             </select>
         </div>
@@ -139,7 +138,7 @@ class CarModel extends Component {
             <div className="container">
             <div className="d-flex justify-content-center h-100">
                 <div>
-                    <div>
+                    <div className="form-inline">
                         {error.code ? <AlertError message={error.message}/> : null }
                         {this.brandList()}
                     
@@ -160,8 +159,8 @@ class CarModel extends Component {
                             {currentModels.map((x) => 
                             <tr>
                                 <td className="item-description">{x.modelName}</td>
-                                <td><button className="button-modify" onClick={() => this.handleClick(x.PK)}>Modifier</button></td> 
-                                <td><button className="button-delete" onClick={() => this.handleDelete(x.PK)}>Supprimer</button></td>
+                                <td><button className="button-modify" onClick={() => this.handleClick(x.id)}>Modifier</button></td> 
+                                <td><button className="button-delete" onClick={() => this.handleDelete(x.id)}>Supprimer</button></td>
                             </tr>
                         )}
                             </tbody>
