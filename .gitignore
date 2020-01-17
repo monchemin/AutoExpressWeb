@@ -22,10 +22,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-#Options -MultiViews
-#   RewriteEngine On
-#  RewriteBase /
-#    RewriteCond %{REQUEST_FILENAME} !-d
-#   RewriteCond %{REQUEST_FILENAME} !-f
-#   RewriteRule ^ index.html [QSA,L]
