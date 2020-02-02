@@ -6,10 +6,9 @@
 trigger:
   branches:
     include:
-    - 
+    - test
     exclude:
     - master
-    - test
     - staging
 
 variables:
