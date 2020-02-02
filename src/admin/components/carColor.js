@@ -38,7 +38,7 @@ class CarColor extends Component {
             presenter.colorName = item.colorName;
             presenter.colorLabel = {};
             
-            if (item.colorLabel !== undefined && item.colorLabel != null) {
+            if (item.colorLabel !== undefined && item.colorLabel != null && item.colorLabel !=="") {
                 presenter.colorLabel = JSON.parse(item.colorLabel);
             }  else {
                 presenter.colorLabel.en = item.colorName
