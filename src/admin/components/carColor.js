@@ -24,17 +24,33 @@ class CarColor extends Component {
     }
 
     fetchData(){
-        onFetchData().then(data => {; 
+        onFetchData().then(data => { 
          this.setState({
-            data: data.response,
+            data: this.present(data.response),
             isLoading: false
         });
     })  
     }
+    present(data) {
+       return  data.map(item => {
+           var presenter = {};
+            presenter.Id = item.Id;
+            presenter.colorName = item.colorName;
+            presenter.colorLabel = {};
+            
+            if (item.colorLabel !== undefined && item.colorLabel != null) {
+                presenter.colorLabel = JSON.parse(item.colorLabel);
+            }  else {
+                presenter.colorLabel.en = item.colorName
+            }
+            return presenter;
+        })
+    }
     createObject(){
         var newObject = {};
         newObject.Id = "";
-        newObject.colorName = "";
+        newObject.en = "";
+        newObject.fr = "";
         return newObject;
     }
    
@@ -48,9 +64,14 @@ class CarColor extends Component {
        
     }
     handleClick(i){
-        this.instance = this.state.data.find((element) => {
+        let element = this.state.data.find((element) => {
            return  element.Id === i
-        }) 
+        })
+        let newObject = {};
+        newObject.Id = element.Id;
+        newObject.en = element.colorLabel.en;
+        newObject.fr = element.colorLabel.fr;
+        this.instance = newObject;
        this.setState({
             selected: this.instance,
            buttonValue: "Modifier"
@@ -71,16 +92,24 @@ class CarColor extends Component {
     }*/
     onToSubmit(){
        
-        if(this.state.selected.colorName ==="") return;
+        if(this.state.selected.colorLabel ===null) return;
         var method = "post"
         if(this.state.selected.Id) method = "put";
         this.doChangeData(method, this.state.selected);
     }
-    doChangeData(method, element){
-        toSubmit(method, element).then(data => {
+
+    doChangeData(method, element){ 
+        let toSend = {};
+        toSend.Id = element.Id;
+        toSend.colorName = element.en !=null ? element.en : element.fr;
+        let label = {};
+        label.en = element.en;
+        label.fr = element.fr;
+        toSend.colorLabel = JSON.stringify(label);
+        toSubmit(method, toSend).then(data => {
             this.instance = this.createObject()
             this.setState({
-                data: data.response,
+                data: this.present(data.response),
                 buttonValue: "Ajouter",
                 selected: this.instance
             })
@@ -96,9 +125,10 @@ class CarColor extends Component {
             <div className="container">
                 <div className="d-flex justify-content-center h-100">
                 <div>
-                    <div className="form-inline">    
-                        <InputIcone value={selected.colorName} id="colorName" labelName="" placeholder="couleur" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
-                        <button   onClick={() => this.onToSubmit()}>{buttonValue}</button>
+                    <div className="register-form">    
+                        <InputIcone value={selected.fr} id="fr" labelName="" placeholder="couleur" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
+                        <InputIcone value={selected.en} id="en" labelName="" placeholder="color" onChange={(property, value) => this.onPropertyValueChange(property, value) }/>
+                        <button onClick={() => this.onToSubmit()}>{buttonValue}</button>
                     </div>
                     <div>
                         <table className="table table-hover">
@@ -109,8 +139,9 @@ class CarColor extends Component {
                             </thead>
                             <tbody>
                                 {data.map((x) => 
-                                    <tr >
-                                        <td>{x.colorName}</td>
+                                    <tr key={x.Id}>
+                                        <td>{x.colorLabel ? x.colorLabel.fr : x.colorName}</td>
+                                        <td>{x.colorLabel ? x.colorLabel.en : x.colorName}</td>
                                         <td><button className="button-modify" onClick={() => this.handleClick(x.Id)}>Modifier</button></td>
                                         <td><button className="button-delete" onClick={() => this.handleDelete(x.Id)}>Supprimer</button></td>
                                     </tr>
