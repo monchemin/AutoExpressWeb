@@ -37,7 +37,7 @@ class CarColor extends Component {
             presenter.Id = item.Id;
             presenter.colorName = item.colorName;
             presenter.colorLabel = {};
-            
+
             if (item.colorLabel !== undefined && item.colorLabel != null && item.colorLabel !=="") {
                 presenter.colorLabel = JSON.parse(item.colorLabel);
             }  else {
@@ -54,7 +54,6 @@ class CarColor extends Component {
         return newObject;
     }
    
-
     onPropertyValueChange(property, value){
         
         ChangePropertyValue(this.instance, property, value)
@@ -63,6 +62,7 @@ class CarColor extends Component {
         })
        
     }
+    
     handleClick(i){
         let element = this.state.data.find((element) => {
            return  element.Id === i
