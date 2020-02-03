@@ -6,14 +6,13 @@
 trigger:
   branches:
     include:
-    - 
+    - release/staging
     exclude:
     - master
     - test
-    - staging
 
 variables:
-- group: testVariables
+- group: stagingVariables
 
 pool:
   vmImage: 'Ubuntu-16.04'
